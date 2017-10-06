@@ -1,0 +1,285 @@
+﻿<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="#" ?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:include href="math_calc.xsl" />
+<xsl:output method="html" version="5" />
+<xsl:template match="/">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>XSLT1.0 Mathematic Calculate Function Library Demo</title>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_HTMLorMML">//</script>
+<style><![CDATA[
+.xslt{
+	font-size:medium;
+	font-weight:bold;
+}
+.func{
+	color:red;
+}
+.calc{
+	color:blue;
+}
+]]></style>
+</head>
+<body>
+<h1>XSLT1.0 Mathematic Calculate Function Library Demo</h1>
+<article>
+<section>
+<p>
+このライブラリは、XSLT1.0を用いてXML上で数学計算を可能とするライブラリである。<br />
+This library is using XSLT1.0 supplying mathematic calculable on XML.<br />
+使い方は、XSLTから"xsl:include"で読み込んで使う。<br />
+How to use this library is referance call as "xsl:include" for your XSLT.<br />
+</p>
+<p>
+実装済み関数　Implemented formulas
+<ul>
+<li>cos(arg)</li>
+<li>exp(arg)</li>
+<li>sqrt(arg)</li>
+<li>ln(arg)</li>
+</ul>
+<ul>
+<li>sin(arg)</li>
+<li>tan(arg)</li>
+<li>log(base,arg)</li>
+<li>pow(base,arg)</li>
+</ul>
+</p>
+<p>
+定義済みグローバル変数　Predefined global variables
+<ul>
+<li>$BIG_NUM (for increase precision number)</li>
+<li>$MAX_VALUE (don't use calculation number)</li>
+<li>π $Math_PI</li>
+<li>exp(1) $Math_E</li>
+<li>ln(2) $Math_LN2</li>
+</ul>
+</p>
+</section>
+<section>
+<h2>MathMLのデモ　MathML Demo</h2>
+<p>
+<h3>数学定数　Math Const. (predefined global variables on XSLT)</h3>
+<xsl:variable name="big_num"><xsl:call-template name="log"><xsl:with-param name="base" select="10" /><xsl:with-param name="arg" select="$BIG_NUM" /></xsl:call-template></xsl:variable>
+<ul>
+<li>ゲタ　(for increase precision number) $BIG_NUM
+<div>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<msup><mn>10</mn><mn><xsl:value-of select="round($big_num)" /></mn></msup>
+</math>
+</div>
+</li>
+<br />
+<li>XSLTの最大値（計算には使えない）　Max value on XSLT (don't use calculation number) $MAX_VALUE
+<div>
+<xsl:variable name="max_value"><xsl:call-template name="log"><xsl:with-param name="base" select="10" /><xsl:with-param name="arg" select="$MAX_VALUE div $BIG_NUM" /></xsl:call-template></xsl:variable>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<msup><mn>10</mn><mn><xsl:value-of select="round($max_value) + round($big_num)" /></mn></msup>
+</math>
+</div>
+</li>
+<br />
+<li>円周率　Ludolph's constant $Math_PI
+<div>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mi mathvariant="normal">&#x3C0;</mi><mo>=</mo><mn>6</mn><munderover><mo>&#x2211;</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mn>25</mn></munderover><mfrac><mrow><mfenced><mrow><mn>2</mn><mi>n</mi></mrow></mfenced><mo>!</mo></mrow><mrow><msup><mn>2</mn><mrow><mn>4</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><msup><mfenced><mrow><mi>n</mi><mo>!</mo></mrow></mfenced><mn>2</mn></msup><mfenced><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfenced></mrow></mfrac><mo>=</mo><mn><xsl:value-of select="floor($Math_PI)" /></mn><xsl:if test="contains($Math_PI,'.')"><mo>.</mo><mn><xsl:value-of select="substring-after($Math_PI,'.')" /></mn></xsl:if>
+</math>
+</div>
+</li>
+<br />
+<li>ネイピア数　Napier's constant $Math_E
+<div>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mi>e</mi><mo>=</mo><munderover><mo>&#x2211;</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mn>20</mn></munderover><mfrac><mn>1</mn><mrow><mi>n</mi><mo>!</mo></mrow></mfrac><mo>=</mo><mn><xsl:value-of select="floor($Math_E)" /></mn><xsl:if test="contains($Math_E,'.')"><mo>.</mo><mn><xsl:value-of select="substring-after($Math_E,'.')" /></mn></xsl:if>
+</math>
+</div>
+</li>
+<br />
+<li>2の自然対数　natural log 2 $Math_LN2
+<div>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<msub><mi>log</mi><mi>e</mi></msub><mfenced><mn>2</mn></mfenced><mo>=</mo><munderover><mo>&#x2211;</mo><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><mn>48</mn></munderover><mfrac><mn>1</mn><mrow><mi>n</mi><msup><mn>2</mn><mi>n</mi></msup></mrow></mfrac><mo>=</mo><mn><xsl:value-of select="floor($Math_LN2)" /></mn><xsl:if test="contains($Math_LN2,'.')"><mo>.</mo><mn><xsl:value-of select="substring-after($Math_LN2,'.')" /></mn></xsl:if>
+</math>
+</div>
+</li>
+</ul>
+</p>
+<p>
+<h3>数式の計算　Math Calc.</h3>
+<ul>
+<xsl:variable name="sqrt5"><xsl:call-template name="sqrt"><xsl:with-param name="arg" select="5" /></xsl:call-template></xsl:variable>
+<li>例題１　exsample 1<br />
+<div>
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<msqrt><mn>5</mn></msqrt><mo>=</mo><mn><xsl:value-of select="floor($sqrt5)" /></mn><xsl:if test="contains($sqrt5,'.')"><mo>.</mo><mn><xsl:value-of select="substring-after($sqrt5,'.')" /></mn></xsl:if>
+</math>
+</div>
+</li>
+<br />
+<li>例題２　exsample 2<br />
+<div>
+<xsl:variable name="numer"><xsl:call-template name="sqrt"><xsl:with-param name="arg" select="$sqrt5 + 1" /></xsl:call-template></xsl:variable>
+<xsl:variable name="denom"><xsl:call-template name="sqrt"><xsl:with-param name="arg" select="$sqrt5 - 1" /></xsl:call-template></xsl:variable>
+<xsl:variable name="lnx"><xsl:call-template name="ln"><xsl:with-param name="arg" select="($numer * $BIG_NUM div $denom) div $BIG_NUM" /></xsl:call-template></xsl:variable>
+<xsl:variable name="calc2" select="$lnx * 2" />
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mn>2</mn><mi>ln</mi><mfenced><mfrac><msqrt><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>1</mn></msqrt><msqrt><msqrt><mn>5</mn></msqrt><mo>-</mo><mn>1</mn></msqrt></mfrac></mfenced><mo>=</mo><mn><xsl:value-of select="floor($calc2)" /></mn><xsl:if test="contains($calc2,'.')"><mo>.</mo><mn><xsl:value-of select="substring-after($calc2,'.')" /></mn></xsl:if>
+</math>
+</div>
+<br />
+<div>
+例題２のタグ　exsample 2 Markup :
+<pre><![CDATA[
+<xsl:include href="math_calc.xsl" />
+
+<xsl:template match="/">
+<div>
+
+<!-- calculation Start -->]]><code class="xslt"><![CDATA[
+<xsl:variable ]]><span class="calc">name="<var>sqrt5</var>"</span><![CDATA[>]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="sqrt"]]></span><![CDATA[><xsl:with-param name="arg" ]]><span class="calc">select="5"</span><![CDATA[ /></xsl:call-template>]]></span><![CDATA[</xsl:variable>
+<xsl:variable ]]><span class="calc">name="<var>numer</var>"</span><![CDATA[>]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="sqrt"]]></span><![CDATA[><xsl:with-param name="arg" ]]><span class="calc">select="<var>$sqrt5</var> + 1"</span><![CDATA[ /></xsl:call-template>]]></span><![CDATA[</xsl:variable>
+<xsl:variable ]]><span class="calc">name="<var>denom</var>"</span><![CDATA[>]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="sqrt"]]></span><![CDATA[><xsl:with-param name="arg" ]]><span class="calc">select="<var>$sqrt5</var> - 1"</span><![CDATA[ /></xsl:call-template>]]></span><![CDATA[</xsl:variable>
+<xsl:variable ]]><span class="calc">name="<var>lnx</var>"</span><![CDATA[>]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="ln"]]></span><![CDATA[><xsl:with-param name="arg" ]]><span class="calc">select="(<var>$numer</var> * <var>$BIG_NUM</var> div <var>$denom</var>) div <var>$BIG_NUM</var>"</span><![CDATA[ /></xsl:call-template>]]></span><![CDATA[</xsl:variable>
+<xsl:variable ]]><span class="calc">name="<var>calc2</var>" select="<var>$lnx</var> * 2"</span><![CDATA[ />]]></code><![CDATA[<!-- notice: declared here local variables -->
+<!-- calculation End -->
+
+<!-- calculated result as MathML Start -->
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mn>2</mn><mi>ln</mi><mfenced><mfrac><msqrt><msqrt><mn>5</mn></msqrt><mo>+</mo><mn>1</mn></msqrt><msqrt><msqrt><mn>5</mn></msqrt><mo>-</mo><mn>1</mn></msqrt></mfrac></mfenced>
+<mo>=</mo><mn>]]><code class="xslt"><![CDATA[<xsl:value-of ]]><span class="calc">select="floor(<var>$calc2</var>)"</span><![CDATA[ />]]></code><![CDATA[</mn>]]><code class="xslt"><![CDATA[<xsl:if ]]><span class="calc">test="contains(<var>$calc2</var>,'.')"</span><![CDATA[>]]></code><![CDATA[<mo>.</mo><mn>]]><code class="xslt"><![CDATA[<xsl:value-of ]]><span class="calc">select="substring-after(<var>$calc2</var>,'.')"</span><![CDATA[ />]]></code><![CDATA[</mn>]]><code class="xslt"><![CDATA[</xsl:if>]]></code><![CDATA[
+</math>
+<!-- calculated result as MathML End -->
+
+</div>
+</xsl:template>
+
+]]></pre>
+</div>
+</li>
+</ul>
+</p>
+</section>
+<section>
+<h2>SVGのデモ　SVG Demo</h2>
+<p>
+<figure style="width:200px;height:200px;">
+<figcaption>正弦グラフ　Sinusoid Graph</figcaption>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
+<path stroke="red" fill-opacity="0">
+<xsl:attribute name="d">M0,100<xsl:call-template name="draw"><xsl:with-param name="t" select="0" /><xsl:with-param name="max" select="200" /><xsl:with-param name="o" select="0" /></xsl:call-template></xsl:attribute>
+<animate attributeType="XML" attributeName="d" dur="4s" repeatCount="indefinite">
+<xsl:attribute name="values"><xsl:call-template name="motion"><xsl:with-param name="cnt" select="0" /></xsl:call-template></xsl:attribute>
+</animate>
+</path>
+<g stroke="blue">
+<line x1="0" x2="200" y1="100" y2="100" />
+<line x1="100" x2="100" y1="0" y2="200" />
+</g>
+<g stroke="black" font-size="20">
+<text x="75" y="20">f(t)</text>
+<text x="90" y="120">0</text>
+<text x="190" y="120">t</text>
+</g>
+</svg>
+</figure>
+<br />
+<div>
+正弦グラフのタグ　Sinusoid graph Markup :
+<pre><![CDATA[
+<xsl:include href="math_calc.xsl" />
+
+<!-- SVG Start -->
+<xsl:template match="/">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
+<path stroke="red" fill-opacity="0">
+]]><code class="xslt"><![CDATA[<xsl:attribute name="d">M0,100<xsl:call-template name="]]><a href="#draw">draw</a><![CDATA["><xsl:with-param ]]><span class="calc">name="t" select="0"</span><![CDATA[ /><xsl:with-param ]]><span class="calc">name="max" select="200"</span><![CDATA[ /><xsl:with-param ]]><span class="calc">name="o" select="0"</span><![CDATA[ /></xsl:call-template></xsl:attribute>]]></code><![CDATA[
+<animate attributeType="XML" attributeName="d" dur="4s" repeatCount="indefinite">
+]]><code class="xslt"><![CDATA[<xsl:attribute name="values"><xsl:call-template name="]]><a href="#motion">motion</a><![CDATA["><xsl:with-param ]]><span class="calc">name="cnt" select="0"</span><![CDATA[ /></xsl:call-template></xsl:attribute>]]></code><![CDATA[
+</animate>
+</path>
+<g stroke="blue">
+<line x1="0" x2="200" y1="100" y2="100" />
+<line x1="100" x2="100" y1="0" y2="200" />
+</g>
+<g stroke="black" font-size="20">
+<text x="75" y="20">f(t)</text>
+<text x="90" y="120">0</text>
+<text x="190" y="120">t</text>
+</g>
+</svg>
+</xsl:template>
+<!-- SVG End -->
+
+<!-- Graph calculate Start -->
+	]]><code class="xslt"><a name="draw"><![CDATA[<xsl:template name="draw">
+		<xsl:param name="t" />
+		<xsl:param name="o" />
+		<xsl:param name="max" />
+		<xsl:variable ]]><span class="calc">name="<var>v1</var>"</span><![CDATA[>]]><span class="func"><![CDATA[
+			<xsl:call-template ]]><span class="calc">name="sin"</span><![CDATA[>
+				<xsl:with-param name="arg" ]]><span class="calc">select="(<var>$Math_PI</var> * <var>$t</var> * 2 * <var>$BIG_NUM</var>) div (<var>$max</var> div 4) div <var>$BIG_NUM</var> + ((<var>$Math_PI</var> * <var>$o</var> * <var>$BIG_NUM</var>) div 2) div <var>$BIG_NUM</var>"</span><![CDATA[ />
+			</xsl:call-template>
+		]]></span><![CDATA[</xsl:variable>L<xsl:value-of ]]><span class="calc">select="<var>$t</var>"</span><![CDATA[ />,<xsl:value-of ]]><span class="calc">select="round((<var>$v1</var> * - 50) + 100 )"</span><![CDATA[ /><xsl:if ]]><span class="calc">test="<var>$t</var> <![CDATA[&lt;]]> <var>$max</var>"</span><![CDATA[>
+			<xsl:call-template name="]]><a href="#draw">draw</a><![CDATA[">
+				<xsl:with-param ]]><span class="calc">name="t" select="<var>$t</var> + 1"</span><![CDATA[ />
+				<xsl:with-param ]]><span class="calc">name="max" select="<var>$max</var>"</span><![CDATA[ />
+				<xsl:with-param ]]><span class="calc">name="o" select="<var>$o</var>"</span><![CDATA[ />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>]]></a><![CDATA[
+ 
+	]]><a name="motion"><![CDATA[<xsl:template name="motion">
+		<xsl:param name="cnt" />
+		<xsl:variable]]><span class="calc"> name="<var>m</var></span><![CDATA[">]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc">name="sin"</span><![CDATA[><xsl:with-param name="arg" ]]><span class="calc">select="((<var>$Math_PI</var> * <var>$cnt</var> * <var>$BIG_NUM</var>) div 2) div <var>$BIG_NUM</var>"</span><![CDATA[ /></xsl:call-template>]]></span><![CDATA[</xsl:variable>M0,<xsl:value-of ]]><span class="calc">select="round(<var>$m</var> * -50) + 100"</span><![CDATA[ /><xsl:call-template name="]]><a href="#draw">draw</a><![CDATA[">
+			<xsl:with-param ]]><span class="calc">name="t" select="0"</span><![CDATA[ />
+			<xsl:with-param ]]><span class="calc">name="max" select="200"</span><![CDATA[ />
+			<xsl:with-param ]]><span class="calc">name="o" select="$cnt"</span><![CDATA[ />
+		</xsl:call-template>L200,<xsl:value-of ]]><span class="calc">select="round(<var>$m</var> * -50) + 100"</span><![CDATA[ />;<xsl:if ]]><span class="calc">test="<var>$cnt</var> <![CDATA[&lt;]]> 4"</span><![CDATA[>
+			<xsl:call-template name="]]><a href="#motion">motion</a><![CDATA[">
+				<xsl:with-param ]]><span class="calc">name="cnt" select="<var>$cnt</var> + 1"</span><![CDATA[ />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>]]></a></code><![CDATA[
+<!-- Graph calculate End -->
+
+]]></pre>
+</div>
+</p>
+</section>
+</article>
+</body>
+</html>
+</xsl:template>
+
+	<xsl:template name="draw">
+		<xsl:param name="t" />
+		<xsl:param name="o" />
+		<xsl:param name="max" />
+		<xsl:variable name="v1">
+			<xsl:call-template name="sin">
+				<xsl:with-param name="arg" select="($Math_PI * $t * 2 * $BIG_NUM) div ($max div 4) div $BIG_NUM + (($Math_PI * $o * $BIG_NUM) div 2) div $BIG_NUM" />
+			</xsl:call-template>
+		</xsl:variable>L<xsl:value-of select="$t" />,<xsl:value-of select="round(($v1 * - 50) + 100 )" /><xsl:if test="$t &lt; $max">
+			<xsl:call-template name="draw">
+				<xsl:with-param name="t" select="$t + 1" />
+				<xsl:with-param name="max" select="$max" />
+				<xsl:with-param name="o" select="$o" />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="motion">
+		<xsl:param name="cnt" />
+		<xsl:variable name="m"><xsl:call-template name="sin"><xsl:with-param name="arg" select="(($Math_PI * $cnt * $BIG_NUM) div 2) div $BIG_NUM" /></xsl:call-template></xsl:variable>M0,<xsl:value-of select="round($m * -50) + 100" /><xsl:call-template name="draw">
+			<xsl:with-param name="t" select="0" />
+			<xsl:with-param name="max" select="200" />
+			<xsl:with-param name="o" select="$cnt" />
+		</xsl:call-template>L200,<xsl:value-of select="round($m * -50) + 100" />;<xsl:if test="$cnt &lt; 4">
+			<xsl:call-template name="motion">
+				<xsl:with-param name="cnt" select="$cnt + 1" />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+</xsl:stylesheet>
