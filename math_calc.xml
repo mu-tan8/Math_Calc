@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿<?xml version="1.0"?>
-=======
 <?xml version="1.0"?>
->>>>>>> refs/remotes/origin/master
 <?xml-stylesheet type="text/xsl" href="#" ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:include href="math_calc.xsl" />
@@ -294,8 +290,4 @@ Sinusoid Graph</figcaption>
 		</xsl:if>
 	</xsl:template>
 
-<<<<<<< HEAD
 </xsl:stylesheet>
-=======
-</xsl:stylesheet>
->>>>>>> refs/remotes/origin/master
