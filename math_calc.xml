@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="#" ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:include href="math_calc.xsl" />
@@ -24,39 +24,6 @@
 <body>
 <h1>XSLT1.0 Mathematic Calculate Function Library Demo</h1>
 <article>
-<section>
-<p>
-このライブラリは、XSLT1.0を用いてXML上で数学計算を可能とするライブラリである。<br />
-This library is using XSLT1.0 supplying mathematic calculable on XML.<br />
-使い方は、XSLTから"xsl:include"で読み込んで使う。<br />
-How to use this library is referance call as "xsl:include" for your XSLT.<br />
-</p>
-<p>
-実装済み関数　Implemented formulas
-<ul>
-<li>cos(arg)</li>
-<li>exp(arg)</li>
-<li>sqrt(arg)</li>
-<li>ln(arg)</li>
-</ul>
-<ul>
-<li>sin(arg)</li>
-<li>tan(arg)</li>
-<li>log(base,arg)</li>
-<li>pow(base,arg)</li>
-</ul>
-</p>
-<p>
-定義済みグローバル変数　Predefined global variables
-<ul>
-<li>$BIG_NUM (for increase precision number)</li>
-<li>$MAX_VALUE (don't use calculation number)</li>
-<li>π $Math_PI</li>
-<li>exp(1) $Math_E</li>
-<li>ln(2) $Math_LN2</li>
-</ul>
-</p>
-</section>
 <section>
 <h2>MathMLのデモ　MathML Demo</h2>
 <p>
@@ -164,7 +131,8 @@ How to use this library is referance call as "xsl:include" for your XSLT.<br />
 <h2>SVGのデモ　SVG Demo</h2>
 <p>
 <figure style="width:200px;height:200px;">
-<figcaption>正弦グラフ　Sinusoid Graph</figcaption>
+<figcaption>正弦グラフ
+Sinusoid Graph</figcaption>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
 <path stroke="red" fill-opacity="0">
 <xsl:attribute name="d">M0,100<xsl:call-template name="draw"><xsl:with-param name="t" select="0" /><xsl:with-param name="max" select="200" /><xsl:with-param name="o" select="0" /></xsl:call-template></xsl:attribute>
