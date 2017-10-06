@@ -2,9 +2,45 @@
 <html>
 <body>
 <h1>Mathematic calculate function library Home Page</h1>
+<section>
 <p>
+このライブラリは、XSLT1.0を用いてXML上で数学計算を可能とするライブラリである。<br />
+This library is using XSLT1.0 supplying mathematic calculable on XML.<br />
+使い方は、XSLTから"xsl:include"で読み込んで使う。<br />
+How to use this library is referance call as "xsl:include" for your XSLT.<br />
+</p>
+<p>
+実装済み関数　Implemented formulas
+<ul>
+<li>cos(arg)</li>
+<li>exp(arg)</li>
+<li>sqrt(arg)</li>
+<li>ln(arg)</li>
+</ul>
+<ul>
+<li>sin(arg)</li>
+<li>tan(arg)</li>
+<li>log(base,arg)</li>
+<li>pow(base,arg)</li>
+</ul>
+</p>
+<p>
+定義済みグローバル変数　Predefined global variables
+<ul>
+<li>$BIG_NUM (for increase precision number)</li>
+<li>$MAX_VALUE (don't use calculation number)</li>
+<li>π $Math_PI</li>
+<li>exp(1) $Math_E</li>
+<li>ln(2) $Math_LN2</li>
+</ul>
+</p>
+</section>
+<section>
+<p>
+  <h3>links</h3>
 <a href="https://mu-tan8.github.io/Math_Calc/math_calc.xml">library Demo</a><br />
 <a href="https://github.com/mu-tan8/Math_Calc/">library Project</a>
 </p>
+</section>
 </body>
 </html>
