@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0"?>
+=======
+<?xml version="1.0"?>
+>>>>>>> refs/remotes/origin/master
 <?xml-stylesheet type="text/xsl" href="#" ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:include href="math_calc.xsl" />
@@ -25,6 +29,7 @@
 <h1>XSLT1.0 Mathematic Calculate Function Library Demo</h1>
 <article>
 <section>
+<<<<<<< HEAD
 <p>
 このライブラリは、XSLT1.0を用いてXML上で数学計算を可能とするライブラリである。<br />
 This library is using XSLT1.0 supplying mathematic calculable on XML.<br />
@@ -58,6 +63,8 @@ How to use this library is referance call as "xsl:include" for your XSLT.<br />
 </p>
 </section>
 <section>
+=======
+>>>>>>> refs/remotes/origin/master
 <h2>MathMLのデモ　MathML Demo</h2>
 <p>
 <h3>数学定数　Math Const. (predefined global variables on XSLT)</h3>
@@ -164,7 +171,12 @@ How to use this library is referance call as "xsl:include" for your XSLT.<br />
 <h2>SVGのデモ　SVG Demo</h2>
 <p>
 <figure style="width:200px;height:200px;">
+<<<<<<< HEAD
 <figcaption>正弦グラフ　Sinusoid Graph</figcaption>
+=======
+<figcaption>正弦グラフ
+Sinusoid Graph</figcaption>
+>>>>>>> refs/remotes/origin/master
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
 <path stroke="red" fill-opacity="0">
 <xsl:attribute name="d">M0,100<xsl:call-template name="draw"><xsl:with-param name="t" select="0" /><xsl:with-param name="max" select="200" /><xsl:with-param name="o" select="0" /></xsl:call-template></xsl:attribute>
@@ -282,4 +294,8 @@ How to use this library is referance call as "xsl:include" for your XSLT.<br />
 		</xsl:if>
 	</xsl:template>
 
+<<<<<<< HEAD
 </xsl:stylesheet>
+=======
+</xsl:stylesheet>
+>>>>>>> refs/remotes/origin/master

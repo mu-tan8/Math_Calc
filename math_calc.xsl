@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0"?>
+=======
+<?xml version="1.0"?>
+>>>>>>> refs/remotes/origin/master
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 >
@@ -9,6 +13,12 @@
 
 					written by mu-tanθ
 
+<<<<<<< HEAD
+=======
+		https://github.com/mu-tan8/Math_Calc/
+
+
+>>>>>>> refs/remotes/origin/master
 
 	Mathematical constant
 
@@ -33,19 +43,27 @@
 		log([@arg="double:$real",@base="double:$real"])	arg > 0 , base > 0
 		pow([@arg="double:$real",@base="double:$real"])
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 	Source :
 
 		乱数と暗号の部屋　（暗号工房）
 
 			from 三角関数・対数関数・指数関数の高速計算法　[ http://www.geocities.jp/midarekazu/cos.html ]
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/master
 		みずぴー日記
 
 			from log(自然対数)の計算　[ http://d.hatena.ne.jp/mzp/touch/20090925/ln ]
 
 -->
 
+<<<<<<< HEAD
 <!--
 <xsl:template match="/">
 <root>
@@ -57,6 +75,8 @@
 </xsl:template>
 -->
 
+=======
+>>>>>>> refs/remotes/origin/master
 
 <xsl:variable name="MAX_VALUE">100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</xsl:variable>
 
@@ -89,7 +109,11 @@
 
 
 
+<<<<<<< HEAD
 <!--	Newton-Raphson Method	-->
+=======
+<!--	Start Sqrt	Newton-Raphson Method	-->
+>>>>>>> refs/remotes/origin/master
 <xsl:template name="sqrt">
 	<xsl:param name="arg" />
 	<xsl:if test="$arg &gt; 0">
@@ -119,7 +143,12 @@
 <!--	End Sqrt	-->
 
 
+<<<<<<< HEAD
 
+=======
+<!--	Start LN 	-->
+<!--		http://d.hatena.ne.jp/mzp/touch/20090925/ln	-->
+>>>>>>> refs/remotes/origin/master
 <xsl:template name="ln">
 	<xsl:param name="arg" />
 	<xsl:if test="$arg &gt; 0">
@@ -186,9 +215,16 @@
 			<xsl:otherwise><xsl:value-of select="$y div $BIG_NUM" /></xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+<<<<<<< HEAD
 
 
 
+=======
+<!--	End LN	-->
+
+<!--	Start Exp	-->
+<!--	cos.pdf		http://www.geocities.jp/midarekazu/cos.html	-->
+>>>>>>> refs/remotes/origin/master
 <xsl:template name="exp">
 	<xsl:param name="arg" />
 	<xsl:variable name="m" select="20" />
@@ -263,9 +299,16 @@
 			<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+<<<<<<< HEAD
 
 
 
+=======
+<!--	End Exp	-->
+
+<!--	Start Cos	-->
+<!--	http://www.geocities.jp/midarekazu/cos.html	-->
+>>>>>>> refs/remotes/origin/master
 <xsl:template name="cos">
 	<xsl:param name="arg" />
 	<xsl:variable name="m" select="20" />
@@ -348,7 +391,11 @@
 			<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
+<<<<<<< HEAD
 
+=======
+<!--	End Cos	-->
+>>>>>>> refs/remotes/origin/master
 
 
 <xsl:template name="_pi">
