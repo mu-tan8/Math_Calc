@@ -131,12 +131,8 @@
 <h2>SVGのデモ　SVG Demo</h2>
 <p>
 <figure style="width:200px;height:200px;">
-<<<<<<< HEAD
-<figcaption>正弦グラフ　Sinusoid Graph</figcaption>
-=======
 <figcaption>正弦グラフ
 Sinusoid Graph</figcaption>
->>>>>>> refs/remotes/origin/master
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
 <path stroke="red" fill-opacity="0">
 <xsl:attribute name="d">M0,100<xsl:call-template name="draw"><xsl:with-param name="t" select="0" /><xsl:with-param name="max" select="200" /><xsl:with-param name="o" select="0" /></xsl:call-template></xsl:attribute>
