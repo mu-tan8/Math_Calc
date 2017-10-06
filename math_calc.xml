@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="#" ?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 <xsl:include href="math_calc.xsl" />
@@ -23,6 +23,12 @@
 </head>
 <body>
 <h1>XSLT1.0 Mathematic Calculate Function Library Demo</h1>
+<p>
+このページはXSLT1.0の数学計算ライブラリの実演サイトである。<br />
+This page is XSLT 1.0 Mathematic Calculate Function Library Demonstration Site.<br />
+もし、このページが表示されているのならば、あなたのブラウザ上で既に動作しているだろう。<br />
+If this page is displayed, the library will already be works in your browser.<br /> 
+</p>
 <article>
 <section>
 <h2>MathMLのデモ　MathML Demo</h2>
