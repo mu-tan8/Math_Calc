@@ -135,7 +135,9 @@ If this page is displayed, the library will already be works in your browser.<br
 </section>
 <section>
 <h2>SVGのデモ　SVG Demo</h2>
+<ul>
 <p>
+<li>グラフデモ　Graph Demo<br />
 <figure style="width:200px;height:200px;">
 <figcaption>正弦グラフ
 Sinusoid Graph</figcaption>
@@ -145,6 +147,7 @@ Sinusoid Graph</figcaption>
 <animate attributeType="XML" attributeName="d" dur="4s" repeatCount="indefinite">
 <xsl:attribute name="values"><xsl:call-template name="motion"><xsl:with-param name="cnt" select="0" /></xsl:call-template></xsl:attribute>
 </animate>
+<animate attributeType="XML" attributeName="stroke" dur="3s" repeatCount="indefinite" values="red;green;blue;green;red" />
 </path>
 <g stroke="blue">
 <line x1="0" x2="200" y1="100" y2="100" />
@@ -171,6 +174,7 @@ Sinusoid Graph</figcaption>
 <animate attributeType="XML" attributeName="d" dur="4s" repeatCount="indefinite">
 ]]><code class="xslt"><![CDATA[<xsl:attribute name="values"><xsl:call-template name="]]><a href="#motion">motion</a><![CDATA["><xsl:with-param ]]><span class="calc">name="cnt" select="0"</span><![CDATA[ /></xsl:call-template></xsl:attribute>]]></code><![CDATA[
 </animate>
+<animate attributeType="XML" attributeName="stroke" dur="3s" repeatCount="indefinite" values="red;green;blue;green;red" />
 </path>
 <g stroke="blue">
 <line x1="0" x2="200" y1="100" y2="100" />
@@ -201,9 +205,9 @@ Sinusoid Graph</figcaption>
 				<xsl:with-param ]]><span class="calc">name="o" select="<var>$o</var>"</span><![CDATA[ />
 			</xsl:call-template>
 		</xsl:if>
-	</xsl:template>]]></a><![CDATA[
- 
-	]]><a name="motion"><![CDATA[<xsl:template name="motion">
+	</xsl:template>
+]]></a><a name="motion"><![CDATA[
+	<xsl:template name="motion">
 		<xsl:param name="cnt" />
 		<xsl:variable]]><span class="calc"> name="<var>m</var></span><![CDATA[">]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc">name="sin"</span><![CDATA[><xsl:with-param name="arg" ]]><span class="calc">select="((<var>$Math_PI</var> * <var>$cnt</var> * <var>$BIG_NUM</var>) div 2) div <var>$BIG_NUM</var>"</span><![CDATA[ /></xsl:call-template>]]></span><![CDATA[</xsl:variable>M0,<xsl:value-of ]]><span class="calc">select="round(<var>$m</var> * -50) + 100"</span><![CDATA[ /><xsl:call-template name="]]><a href="#draw">draw</a><![CDATA[">
 			<xsl:with-param ]]><span class="calc">name="t" select="0"</span><![CDATA[ />
@@ -214,12 +218,114 @@ Sinusoid Graph</figcaption>
 				<xsl:with-param ]]><span class="calc">name="cnt" select="<var>$cnt</var> + 1"</span><![CDATA[ />
 			</xsl:call-template>
 		</xsl:if>
-	</xsl:template>]]></a></code><![CDATA[
+	</xsl:template>
+]]></a></code><![CDATA[
 <!-- Graph calculate End -->
 
 ]]></pre>
 </div>
+</li>
 </p>
+<p>
+<li>描画モーションデモ　Draw Motion Demo<br />
+<figure style="width:200px;height:200px;">
+<figcaption>
+擬正葉曲線描画モーション
+Pseudo-Rose curve Draw Motion
+</figcaption>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
+<path stroke="lime" fill-opacity="0">
+<xsl:attribute name="d">M<xsl:call-template name="calc"><xsl:with-param name="x" select="-200" /><xsl:with-param name="m" select="200" /></xsl:call-template><xsl:call-template name="draw2"><xsl:with-param name="cnt" select="-200" /><xsl:with-param name="max" select="200" /></xsl:call-template></xsl:attribute>
+<animate attributeType="XML" attributeName="d" dur="20s" repeatCount="indefinite">
+<xsl:attribute name="values"><xsl:call-template name="motion2"><xsl:with-param name="cnt" select="-200" /><xsl:with-param name="max" select="200" /><xsl:with-param name="value">M100,100</xsl:with-param></xsl:call-template></xsl:attribute>
+</animate>
+<animate attributeType="XML" attributeName="stroke" dur="5s" repeatCount="indefinite" values="lime;blue;red;blue;lime"></animate>
+<animateTransform attributeType="XML" attributeName="transform" type="rotate" from="0 100,100" to="360 100,100" dur="10s" repeatCount="indefinite"></animateTransform>
+</path>
+</svg>
+</figure>
+<br />
+<div>
+擬正葉曲線描画モーションのタグ　
+Pseudo-Rose curve Draw Motion Markup :
+<pre><![CDATA[
+<xsl:include href="math_calc.xsl" />
+
+<!-- SVG Start -->
+<xsl:template match="/">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
+<path stroke="lime" fill-opacity="0">
+]]><code class="xslt"><![CDATA[<xsl:attribute name="d">M<xsl:call-template name="]]><a href="#calc">calc</a><![CDATA["><xsl:with-param ]]><span class="calc"><![CDATA[name="x" select="-200"]]></span><![CDATA[ /><xsl:with-param ]]><span class="calc"><![CDATA[name="m" select="200"]]></span><![CDATA[ /></xsl:call-template><xsl:call-template name="]]><a href="#draw2">draw2</a><![CDATA["><xsl:with-param ]]><span class="calc"><![CDATA[name="cnt" select="-200"]]></span><![CDATA[ /><xsl:with-param ]]><span class="calc"><![CDATA[name="max" select="200"]]></span><![CDATA[ /></xsl:call-template></xsl:attribute>]]></code><![CDATA[
+<animate attributeType="XML" attributeName="d" dur="20s" repeatCount="indefinite">
+]]><code class="xslt"><![CDATA[<xsl:attribute name="values"><xsl:call-template name="]]><a href="#motion2">motion2</a><![CDATA["><xsl:with-param ]]><span class="calc"><![CDATA[name="cnt" select="-200"]]></span><![CDATA[ /><xsl:with-param ]]><span class="calc"><![CDATA[name="max" select="200"]]></span><![CDATA[ /><xsl:with-param ]]><span class="calc"><![CDATA[name="value"]]></span><![CDATA[>M100,100</xsl:with-param></xsl:call-template></xsl:attribute>]]></code><![CDATA[
+</animate>
+<animate attributeType="XML" attributeName="stroke" dur="5s" repeatCount="indefinite" values="lime;blue;red;blue;lime"></animate>
+<animateTransform attributeType="XML" attributeName="transform" type="rotate" from="0 100,100" to="360 100,100" dur="10s" repeatCount="indefinite"></animateTransform>
+</path>
+</svg>
+</xsl:template>
+<!-- SVG End -->
+
+<!-- Graphic calulation Start-->
+]]><code class="xslt"><a name="calc"><![CDATA[
+	<xsl:template name="calc">
+		<xsl:param name="x" />
+		<xsl:param name="m" />
+		<xsl:variable ]]><span class="calc">name="<var>sinA</var>"</span><![CDATA[>
+			]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="sin"]]></span><![CDATA[>
+				<xsl:with-param name="arg" ]]><span class="calc">select="(<var>$Math_PI</var> * -<var>$x</var> * <var>$BIG_NUM</var>) div (<var>$m</var> * <var>$BIG_NUM</var> div 4)"</span><![CDATA[ />
+			</xsl:call-template>]]></span><![CDATA[
+		</xsl:variable>
+		<xsl:variable ]]><span class="calc">name="<var>sinB</var>"</span><![CDATA[>
+			]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="sin"]]></span><![CDATA[>
+				<xsl:with-param name="arg" ]]><span class="calc">select="(<var>$Math_PI</var> * -<var>$x</var> * (31 div 5) * <var>$BIG_NUM</var>) div (<var>$m</var> * <var>$BIG_NUM</var> div 4)"</span><![CDATA[ />
+			</xsl:call-template>]]></span><![CDATA[
+		</xsl:variable>
+		<xsl:variable ]]><span class="calc">name="<var>sinN</var>"</span><![CDATA[>
+			]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="sin"]]></span><![CDATA[>
+				<xsl:with-param name="arg" ]]><span class="calc">select="(<var>$Math_PI</var> * -<var>$x</var> * 8 * <var>$BIG_NUM</var>) div (<var>$m</var> * <var>$BIG_NUM</var> div 4)"</span><![CDATA[ />
+			</xsl:call-template>]]></span><![CDATA[
+		</xsl:variable>
+		<xsl:variable ]]><span class="calc">name="<var>cosA</var>"</span><![CDATA[>
+			]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="cos"]]></span><![CDATA[>
+				<xsl:with-param name="arg" ]]><span class="calc">select="(<var>$Math_PI</var> * <var>$x</var> * <var>$BIG_NUM</var>) div (<var>$m</var> * <var>$BIG_NUM</var> div 4)"</span><![CDATA[ />
+			</xsl:call-template>]]></span><![CDATA[
+		</xsl:variable>
+		<xsl:variable ]]><span class="calc">name="<var>cosN</var>"</span><![CDATA[>
+			]]><span class="func"><![CDATA[<xsl:call-template ]]><span class="calc"><![CDATA[name="cos"]]></span><![CDATA[>
+				<xsl:with-param name="arg" ]]><span class="calc">select="(<var>$Math_PI</var> * <var>$x</var> * 8 * <var>$BIG_NUM</var>) div (<var>$m</var> * <var>$BIG_NUM</var> div 4)"</span><![CDATA[ />
+			</xsl:call-template>]]></span><![CDATA[
+		</xsl:variable><xsl:value-of ]]><span class="calc">select="round(<var>$cosA</var> * <var>$sinB</var> * 50 + <var>$cosN</var> * 30 div 8) + 100"</span><![CDATA[ />,<xsl:value-of ]]><span class="calc">select="round(<var>$sinA</var> * <var>$sinB</var> * 50 + <var>$sinN</var> * 30 div 8)+100"</span><![CDATA[ /></xsl:template>
+]]></a><a name="draw2"><![CDATA[
+	<xsl:template name="draw2">
+		<xsl:param name="cnt" />
+		<xsl:param name="max" />
+		<xsl:if ]]><span class="calc">test="<var>$cnt</var> <![CDATA[&lt;=]]> <var>$max</var>"</span><![CDATA[>L<xsl:call-template name="]]><a href="#calc">calc</a><![CDATA["><xsl:with-param ]]><span class="calc">name="x" select="<var>$cnt</var>"</span><![CDATA[ /><xsl:with-param ]]><span class="calc">name="m" select="<var>$max</var>"</span><![CDATA[ /></xsl:call-template>
+			<xsl:call-template name="]]><a href="#draw2">draw2</a><![CDATA[">
+				<xsl:with-param ]]><span class="calc">name="cnt" select="<var>$cnt</var> + 1"</span><![CDATA[ />
+				<xsl:with-param ]]><span class="calc">name="max" select="<var>$max</var>"</span><![CDATA[ />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+]]></a><a name="motion2"><![CDATA[
+	<xsl:template name="motion2">
+		<xsl:param name="cnt" />
+		<xsl:param name="max" />
+		<xsl:param name="value" />
+		<xsl:if ]]><span class="calc">test="<var>$cnt</var> <![CDATA[&lt;=]]> <var>$max</var>"</span><![CDATA[><xsl:value-of ]]><span class="calc">select="<var>$value</var>"</span><![CDATA[ />;<xsl:call-template name="]]><a href="#motion2">motion2</a><![CDATA[">
+				<xsl:with-param ]]><span class="calc">name="cnt" select="<var>$cnt</var> + 1"</span><![CDATA[ />
+				<xsl:with-param ]]><span class="calc">name="max" select="<var>$max</var>"</span><![CDATA[ />
+				<xsl:with-param ]]><span class="calc">name="value"</span><![CDATA[><xsl:value-of ]]><span class="calc">select="<var>$value</var>"</span><![CDATA[ />L<xsl:call-template name="]]><a href="#calc">calc</a><![CDATA["><xsl:with-param ]]><span class="calc">name="x" select="<var>$cnt</var>"</span><![CDATA[ /><xsl:with-param ]]><span class="calc">name="m" select="<var>$max</var>"</span><![CDATA[ /></xsl:call-template></xsl:with-param>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+]]></a></code><![CDATA[
+<!--Graphic calculation End -->
+]]></pre>
+</div>
+</li>
+</p>
+</ul>
 </section>
 </article>
 </body>
@@ -252,6 +358,58 @@ Sinusoid Graph</figcaption>
 		</xsl:call-template>L200,<xsl:value-of select="round($m * -50) + 100" />;<xsl:if test="$cnt &lt; 4">
 			<xsl:call-template name="motion">
 				<xsl:with-param name="cnt" select="$cnt + 1" />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="calc">
+		<xsl:param name="x" />
+		<xsl:param name="m" />
+		<xsl:variable name="sinA">
+			<xsl:call-template name="sin">
+				<xsl:with-param name="arg" select="($Math_PI * -$x * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="sinB">
+			<xsl:call-template name="sin">
+				<xsl:with-param name="arg" select="($Math_PI * -$x * (31 div 5) * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="sinN">
+			<xsl:call-template name="sin">
+				<xsl:with-param name="arg" select="($Math_PI * -$x * 8 * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="cosA">
+			<xsl:call-template name="cos">
+				<xsl:with-param name="arg" select="($Math_PI * $x * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="cosN">
+			<xsl:call-template name="cos">
+				<xsl:with-param name="arg" select="($Math_PI * $x * 8 * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable><xsl:value-of select="round($cosA * $sinB * 50 + $cosN * 30 div 8) + 100" />,<xsl:value-of select="round($sinA * $sinB * 50 + $sinN * 30 div 8)+100" /></xsl:template>
+
+	<xsl:template name="draw2">
+		<xsl:param name="cnt" />
+		<xsl:param name="max" />
+		<xsl:if test="$cnt &lt;= $max">L<xsl:call-template name="calc"><xsl:with-param name="x" select="$cnt" /><xsl:with-param name="m" select="$max" /></xsl:call-template>
+			<xsl:call-template name="draw2">
+				<xsl:with-param name="cnt" select="$cnt + 1" />
+				<xsl:with-param name="max" select="$max" />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="motion2">
+		<xsl:param name="cnt" />
+		<xsl:param name="max" />
+		<xsl:param name="value" />
+		<xsl:if test="$cnt &lt;= $max"><xsl:value-of select="$value" />;<xsl:call-template name="motion2">
+				<xsl:with-param name="cnt" select="$cnt + 1" />
+				<xsl:with-param name="max" select="$max" />
+				<xsl:with-param name="value"><xsl:value-of select="$value" />L<xsl:call-template name="calc"><xsl:with-param name="x" select="$cnt" /><xsl:with-param name="m" select="$max" /></xsl:call-template></xsl:with-param>
 			</xsl:call-template>
 		</xsl:if>
 	</xsl:template>
