@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 >
@@ -35,7 +35,7 @@
 		log([@arg="double:$real",@base="double:$real"])	arg > 0 , base > 0
 		pow([@arg="double:$real",@base="double:$real"])
 
-	 Source :
+	 Reference materials :
 
 		乱数と暗号の部屋　（暗号工房）
 

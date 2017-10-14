@@ -1,4 +1,4 @@
-# Math_Calc
+﻿# Math_Calc
 using XSLT1.0 supplying mathematic calculable library on XML
 
 # XSLT 1.0 Mathematic calculate function library Project
@@ -13,7 +13,20 @@ This library is using XSLT1.0 supplying mathematic calculable on XML.
 
 How to use this library is referance call as "xsl:include" for your XSLT.
 
-実装済み関数　Implemented formulas
+
+### ライブラリ利用条件　Library use License
+
+
++ 無償利用　Free use
++ 無保証　No guarantee
++ 改変可能　Modifiable
++ 改変時の著作権継承　Inheritance of copyright (modified)
++ 参考資料の明記　specify the Reference materials
++ ファイル名の変更自由　renameable filename
+
+
+
+### 実装済み関数　Implemented formulas
 
 
 + cos(arg)
@@ -28,12 +41,14 @@ How to use this library is referance call as "xsl:include" for your XSLT.
 + pow(base,arg)
 
 
-定義済みグローバル変数　Predefined global variables
+### 定義済みグローバル変数　Predefined global variables
 
-+ $BIG_NUM (for increase precision number)
-+ $MAX_VALUE (don't use calculation number)
-+ π $Math_PI
-+ exp(1) $Math_E
-+ ln(2) $Math_LN2
++ $BIG_NUM (for increase precision number) = 10^(56)
++ $MAX_VALUE (don't use calculation number) = 10^(308)
++ π $Math_PI = 3.14159265358979
++ exp(1) $Math_E = 2.718281828459045
++ ln(2) $Math_LN2 = 0.693147180559945
 
-Demo [https://mu-tan8.github.io/Math_Calc/math_calc.xml]
+Home Page [https://mu-tan8.github.io/Math_Calc/]
+
+Demo Page [https://mu-tan8.github.io/Math_Calc/math_calc.xsl]
