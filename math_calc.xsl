@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <xsl:stylesheet version="1.0"
 	xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 >
@@ -10,7 +10,6 @@
 					written by mu-tanθ
 
 		https://github.com/mu-tan8/Math_Calc/
-
 
 
 	Mathematical constant
@@ -36,19 +35,17 @@
 		log([@arg="double:$real",@base="double:$real"])	arg > 0 , base > 0
 		pow([@arg="double:$real",@base="double:$real"])
 
-
-	Source :
+	 Reference materials :
 
 		乱数と暗号の部屋　（暗号工房）
 
 			from 三角関数・対数関数・指数関数の高速計算法　[ http://www.geocities.jp/midarekazu/cos.html ]
 
-		みずぴー日記
+  		みずぴー日記
 
 			from log(自然対数)の計算　[ http://d.hatena.ne.jp/mzp/touch/20090925/ln ]
 
 -->
-
 
 <xsl:variable name="MAX_VALUE">100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</xsl:variable>
 
@@ -80,7 +77,7 @@
 </xsl:variable>
 
 
-
+<!--	Newton-Raphson Method	-->
 <!--	Start Sqrt	Newton-Raphson Method	-->
 <xsl:template name="sqrt">
 	<xsl:param name="arg" />
@@ -109,7 +106,6 @@
 		</xsl:choose>
 	</xsl:template>
 <!--	End Sqrt	-->
-
 
 <!--	Start LN 	-->
 <!--		http://d.hatena.ne.jp/mzp/touch/20090925/ln	-->
