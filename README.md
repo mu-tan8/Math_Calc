@@ -51,4 +51,4 @@ How to use this library is referance call as "xsl:include" for your XSLT.
 
 Home Page [https://mu-tan8.github.io/Math_Calc/]
 
-Demo Page [https://mu-tan8.github.io/Math_Calc/math_calc.xsl]
+Demo Page [https://mu-tan8.github.io/Math_Calc/math_calc.xml]
