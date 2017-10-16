@@ -64,28 +64,58 @@ so it taks several seconds to display.<br />
 実装済み関数　Implemented formulas
 <ul>
 <li>(double) #text = <span>cos</span>[(double) arg]<br />
+"arg"に対する余弦を返す<br />
+return of the cosine value of "arg".<br />
 </li>
 <li>(double) #text = <span>exp</span>[(double) arg]<br />
+"arg"に対する自然指数を返す<br />
+return of the natural exponent value of "arg".<br />
 </li>
 <li>(double) #text = <span>sqrt</span>[(double) arg]   arg &gt; 0<br />
+"arg"に対する平方根を返す<br />
+return of the square root value for "arg".<br />
+"arg"が0以下なら空文字となる<br />
+if value of "arg" was out of range, than empty text.
 </li>
 <li>(double) #text = <span>ln</span>[(double) arg]   arg &gt; 0<br />
+"arg"に対する自然対数を返す<br />
+return of the natural logarithm value for "arg".<br />
+"arg"が0以下なら空文字となる<br />
+if value of "arg" was out of range, than empty text.
 </li>
 </ul>
 <ul>
 <li>(double) #text = <span>sin</span>[(double) arg]<br />
+"arg"に対する正弦を返す<br />
+return of the sine value for "arg".
 </li>
 <li>(double) #text = <span>tan</span>[(double) arg]<br />
+"arg"に対する正接を返す<br />
+return of the tangent value for "arg".
 </li>
 <li>(double) #text = <span>log</span>[(double) base , (double) arg]   arg &gt; 0 , base &gt; 0<br />
+"base"を底とする"arg"の対数を返す<br />
+return of the logarithm whose base is "base" for "arg".<br />
+"arg"または"base"が0以下なら空文字となる<br />
+if value of arg or base was out of range, than empty text.
 </li>
 <li>(double) #text = <span>pow</span>[(double) base , (double) arg]   base &gt; 0<br />
+"base"を底とする"arg"の指数を返す<br />
+return of the exponent whose base is "base" for "arg".<br />
+"base"が以下なら空文字となる<br />
+if value of base was out of range, than empty text.
 </li>
 </ul>
 <ul>
 <li>(int) #text = <span>sgn</span>[(double) arg]<br />
+"arg"が正の実数なら1、負の実数なら-1、いずれでもなければ0を返す<br />
+return if value of "arg" was a positive real number than 1,<br />
+else if value of a negative real number than -1,<br />
+otherwise value of 0.
 </li>
 <li>(double) #text = <span>abs</span>[(double) arg]<br />
+"arg"に対する絶対値を返す<br />
+return of absolute value for "arg".
 </li>
 </ul>
 </p>
