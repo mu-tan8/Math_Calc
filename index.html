@@ -1,5 +1,14 @@
 ﻿<!DOCTYPE html>
 <html>
+<head>
+<title>Mathematic calculate function library Home Page</title>
+<style>
+.func_name {
+  color:red;
+  text-decoration:underline;
+}
+</style>
+</head>
 <body>
 <h1>Mathematic calculate function library Home Page</h1>
 <section>
@@ -12,7 +21,7 @@ How to use this library is referance call as "xsl:include" for your XSLT.<br />
 </section>
 <section>
 <p>
-ライブラリ利用条件　Library use License<br />
+<h2>ライブラリ利用条件　Library use License</h2>
 <ul>
 <li>無償利用　Free use</li>
 <li>無保証　No guarantee</li>
@@ -21,38 +30,15 @@ How to use this library is referance call as "xsl:include" for your XSLT.<br />
 <li>参考資料の併記 Write Reference materials down with</li>
 <li>ファイル名の変更自由　renameable filename</li>
 </ul>
+<div>
+このライブラリを用いて創られた著作物の権利は利用者自身に帰属する<br />
+The rights of the work created using this library belong to the user. <br />
+</div>
 </p>
 </section>
 <section>
 <p>
-実装済み関数　Implemented formulas
-<ul>
-<li>cos(arg)</li>
-<li>exp(arg)</li>
-<li>sqrt(arg)</li>
-<li>ln(arg)</li>
-</ul>
-<ul>
-<li>sin(arg)</li>
-<li>tan(arg)</li>
-<li>log(base,arg)</li>
-<li>pow(base,arg)</li>
-</ul>
-</p>
-<p>
-定義済みグローバル変数　Predefined global variables
-<ul>
-<li>$BIG_NUM (for increase precision number) = 10^(56)</li>
-<li>$MAX_VALUE (don't use calculation number) = 10^(308)</li>
-<li>π $Math_PI = 3.14159265358979</li>
-<li>exp(1) $Math_E = 2.718281828459045</li>
-<li>ln(2) $Math_LN2 = 0.693147180559945</li>
-</ul>
-</p>
-</section>
-<section>
-<p>
-  <h3>links</h3>
+<h2>links</h2>
 <ul>
 <li><a href="https://github.com/mu-tan8/Math_Calc/">library Project</a><br />
 <div>
@@ -67,6 +53,129 @@ The Demonstration site using this library , by author<br />
 notice : this page process the library on your browser,<br />
 so it taks several seconds to display.<br />
 </div>
+</li>
+</ul>
+</p>
+</section>
+<p>
+<h2>ライブラリの使い方 How  to use library</h2>
+<pre>
+&lt;xsl:call-template name="<span class="func_name">math_func_name</span>"&gt;
+&lt;xsl:with-param name="arg" select="arg_value" /&gt;
+&lt;!--
+&lt;xsl:with-param name="base" select="base_value" /&gt;
+--&gt;
+&lt;/xsl:call-template&gt;
+</pre>
+</p>
+<section>
+<h2>実装状況ドキュメント　Implement Document</h2>
+<p>
+<h3>定義済みグローバル変数　Predefined global variables</h3>
+<ul>
+<li>
+<h4>$BIG_NUM  = 10^(56)</h4>
+ゲタ　（計算精度を上げるための数）<br />
+Big number(for increase precision number)<br />
+</li>
+<li>
+<h4>$MAX_VALUE  = 10^(308)</h4>
+最大値　（計算には使えない）<br />
+Max value on XSLT (don't use calculation number)<br />
+</li>
+<li>
+<h4>$Math_PI = 3.14159265358979</h4>
+円周率π<br />
+Ludolph's constant.
+</li>
+<li>
+<h4>$Math_E = 2.718281828459045</h4>
+ネイピア定数e<br />
+Napier's constant.
+</li>
+<li>
+<h4>$Math_LN2 = 0.693147180559945</h4>
+2の自然対数<br />
+natural logarithm 2.
+</li>
+</ul>
+</p>
+<p>
+<h3>実装済み関数　Implemented formulas</h3>
+<ul>
+<li>
+<h4>(double) #text = <span class="func_name">cos</span>[(double) arg]</h4>
+"arg"に対する余弦を返す<br />
+return of the cosine value of "arg".<br />
+<br />
+</li>
+<li>
+<h4>(double) #text = <span class="func_name">exp</span>[(double) arg]</h4>
+"arg"に対する自然指数を返す<br />
+return of the natural exponent value of "arg".<br />
+<br />
+</li>
+<li>
+<h4>(double) #text = <span class="func_name">sqrt</span>[(double) arg]   arg &gt; 0</h4>
+"arg"に対する平方根を返す<br />
+return of the square root value for "arg".<br />
+"arg"が0以上でなければ空文字となる<br />
+if value of "arg" was out of range, than empty text.<br />
+<br />
+</li>
+<li>
+<h4>(double) #text = <span class="func_name">ln</span>[(double) arg]   arg &gt; 0</h4>
+"arg"に対する自然対数を返す<br />
+return of the natural logarithm value for "arg".<br />
+"arg"が0以上でなければ空文字となる<br />
+if value of "arg" was out of range, than empty text.<br />
+<br />
+</li>
+</ul>
+<ul>
+<li>
+<h4>(double) #text = <span class="func_name">sin</span>[(double) arg]</h4>
+"arg"に対する正弦を返す<br />
+return of the sine value for "arg".<br />
+<br />
+</li>
+<li>
+<h4>(double) #text = <span class="func_name">tan</span>[(double) arg]</h4>
+"arg"に対する正接を返す<br />
+return of the tangent value for "arg".<br />
+<br />
+</li>
+<li>
+<h4>(double) #text = <span class="func_name">log</span>[(double) base , (double) arg]   arg &gt; 0 , base &gt; 0</h4>
+"base"を底とする"arg"の対数を返す<br />
+return of the logarithm whose base is "base" for "arg".<br />
+"arg"または"base"が0以上でなければ空文字となる<br />
+if value of arg or base was out of range, than empty text.<br />
+<br />
+</li>
+<li>
+<h4>(double) #text = <span class="func_name">pow</span>[(double) base , (double) arg]   base &gt; 0</h4>
+"base"を底とする"arg"の指数を返す<br />
+return of the exponent whose base is "base" for "arg".<br />
+"base"が0以上でなければ空文字となる<br />
+if value of base was out of range, than empty text.<br />
+<br />
+</li>
+</ul>
+<ul>
+<li>
+<h4>(int) #text = <span class="func_name">sgn</span>[(double) arg]</h4>
+"arg"が正の実数なら1、負の実数なら-1、いずれでもなければ0を返す<br />
+return if value of "arg" was a positive real number than 1,<br />
+else if value of a negative real number than -1,<br />
+otherwise value of 0.<br />
+<br />
+</li>
+<li>
+<h4>(double) #text = <span class="func_name">abs</span>[(double) arg]</h4>
+"arg"に対する絶対値を返す<br />
+return of absolute value for "arg".<br />
+<br />
 </li>
 </ul>
 </p>

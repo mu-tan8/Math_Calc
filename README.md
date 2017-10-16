@@ -25,30 +25,38 @@ How to use this library is referance call as "xsl:include" for your XSLT.
 + ファイル名の変更自由　renameable filename
 
 
+このライブラリを用いて創られた著作物の権利は利用者自身に帰属する
+
+The rights of the work created using this library belong to the user. 
+
 
 ### 実装済み関数　Implemented formulas
 
 
 + cos(arg)
 + exp(arg)
-+ sqrt(arg)
-+ ln(arg)
++ sqrt(arg) arg > 0
++ ln(arg) arg > 0
 
 
 + sin(arg)
 + tan(arg)
-+ log(base,arg)
-+ pow(base,arg)
++ log(base,arg) base > 0 , arg > 0
++ pow(base,arg) base > 0
+
+
++ sgn(arg) 
++ abs(arg) 
 
 
 ### 定義済みグローバル変数　Predefined global variables
 
-+ $BIG_NUM (for increase precision number) = 10^(56)
-+ $MAX_VALUE (don't use calculation number) = 10^(308)
++ (for increase precision number) $BIG_NUM = 10^(56)
++ (don't use calculation number) $MAX_VALUE = 10^(308)
 + π $Math_PI = 3.14159265358979
 + exp(1) $Math_E = 2.718281828459045
 + ln(2) $Math_LN2 = 0.693147180559945
 
 Home Page [https://mu-tan8.github.io/Math_Calc/]
 
-Demo Page [https://mu-tan8.github.io/Math_Calc/math_calc.xsl]
+Demo Page [https://mu-tan8.github.io/Math_Calc/math_calc.xml]
