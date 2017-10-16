@@ -5,11 +5,30 @@
 
 <!--
 
+
+
 	Mathematic calculate function library
 
-					written by mu-tanθ
 
-		https://github.com/mu-tan8/Math_Calc/
+
+					author by mu-tan8（mu-tanθ）
+
+					copyright(C) 2017 mu-tan8
+
+		Library Home Page	https://mu-tan8.github.io/Math_Calc/
+
+
+	ライブラリ利用条件　Library use License
+
+	無償利用　Free use
+	無保証　No guarantee
+	改変可能　Modifiable
+	改変時の著作権継承　Inheritance of copyright (modified)
+	参考資料の明記　specify the Reference materials
+	ファイル名の変更自由　renameable filename
+
+	このライブラリを用いて創られた著作物の権利は利用者自身に帰属する
+	The rights of the work created using this library belong to the user.
 
 
 	Mathematical constant
@@ -33,7 +52,9 @@
 	sqrt([@arg="double:$real"])	arg > 0
 	ln([@arg="double:$real"])	arg > 0
 		log([@arg="double:$real",@base="double:$real"])	arg > 0 , base > 0
-		pow([@arg="double:$real",@base="double:$real"])
+		pow([@arg="double:$real",@base="double:$real"]) base > 0
+	sgn([@arg="double:$real"])
+		abs([@arg="double:$real"])
 
 	 Reference materials :
 
@@ -44,6 +65,11 @@
   		みずぴー日記
 
 			from log(自然対数)の計算　[ http://d.hatena.ne.jp/mzp/touch/20090925/ln ]
+
+		Wikipedia 
+
+			from 円周率　arcsinの項 [ https://ja.wikipedia.org/w/index.php?title=円周率&oldid=39637743 ]
+
 
 -->
 
@@ -342,6 +368,8 @@
 <!--	End Cos	-->
 
 
+<!--	Math_PI arcSin( 1 / 2 )	-->
+<!--	https://ja.wikipedia.org/w/index.php?title=円周率&oldid=39637743	-->
 <xsl:template name="_pi">
 	<xsl:param name="cnt" select="0" />
 	<xsl:param name="max" select="23" />
@@ -380,7 +408,9 @@
 		<xsl:otherwise><xsl:value-of select="$value div $BIG_NUM" /></xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
+<!--	Math_PI End	-->
 
+<!--	Math_LN2	-->
 <xsl:template name="_ln2">
 	<xsl:param name="cnt" />
 	<xsl:param name="max" />
@@ -404,7 +434,7 @@
 		<xsl:otherwise><xsl:value-of select="$value div $BIG_NUM" /></xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
-
+<!--	Math_LN2 End	-->
 
 
 <xsl:template name="pow">
