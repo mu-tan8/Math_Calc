@@ -1,0 +1,71 @@
+﻿<?xml version="1.0"?>
+<?xml-stylesheet type="text/xml" href="#"?>
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:include href="math_calc.xsl" />
+<xsl:output method="xml" media-type="image/svg" />
+<xsl:template match="/">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 200 200">
+<path stroke="lime" fill-opacity="0">
+<xsl:attribute name="d">M<xsl:call-template name="calc"><xsl:with-param name="x" select="-200" /><xsl:with-param name="m" select="200" /></xsl:call-template><xsl:call-template name="draw2"><xsl:with-param name="cnt" select="-200" /><xsl:with-param name="max" select="200" /></xsl:call-template></xsl:attribute>
+<animate attributeType="XML" attributeName="d" dur="20s" repeatCount="indefinite">
+<xsl:attribute name="values"><xsl:call-template name="motion2"><xsl:with-param name="cnt" select="-200" /><xsl:with-param name="max" select="200" /><xsl:with-param name="value">M100,100</xsl:with-param></xsl:call-template></xsl:attribute>
+</animate>
+<animate attributeType="XML" attributeName="stroke" dur="5s" repeatCount="indefinite" values="lime;blue;red;blue;lime"></animate>
+<animateTransform attributeType="XML" attributeName="transform" type="rotate" from="0 100,100" to="360 100,100" dur="10s" repeatCount="indefinite"></animateTransform>
+</path>
+</svg>
+</xsl:template>
+
+	<xsl:template name="calc">
+		<xsl:param name="x" />
+		<xsl:param name="m" />
+		<xsl:variable name="sinA">
+			<xsl:call-template name="sin">
+				<xsl:with-param name="arg" select="($Math_PI * -$x * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="sinB">
+			<xsl:call-template name="sin">
+				<xsl:with-param name="arg" select="($Math_PI * -$x * (31 div 5) * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="sinN">
+			<xsl:call-template name="sin">
+				<xsl:with-param name="arg" select="($Math_PI * -$x * 8 * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="cosA">
+			<xsl:call-template name="cos">
+				<xsl:with-param name="arg" select="($Math_PI * $x * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="cosN">
+			<xsl:call-template name="cos">
+				<xsl:with-param name="arg" select="($Math_PI * $x * 8 * $BIG_NUM) div ($m * $BIG_NUM div 4)" />
+			</xsl:call-template>
+		</xsl:variable><xsl:value-of select="round($cosA * $sinB * 50 + $cosN * 30 div 8) + 100" />,<xsl:value-of select="round($sinA * $sinB * 50 + $sinN * 30 div 8)+100" /></xsl:template>
+
+	<xsl:template name="draw2">
+		<xsl:param name="cnt" />
+		<xsl:param name="max" />
+		<xsl:if test="$cnt &lt;= $max">L<xsl:call-template name="calc"><xsl:with-param name="x" select="$cnt" /><xsl:with-param name="m" select="$max" /></xsl:call-template>
+			<xsl:call-template name="draw2">
+				<xsl:with-param name="cnt" select="$cnt + 1" />
+				<xsl:with-param name="max" select="$max" />
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+	<xsl:template name="motion2">
+		<xsl:param name="cnt" />
+		<xsl:param name="max" />
+		<xsl:param name="value" />
+		<xsl:if test="$cnt &lt;= $max"><xsl:value-of select="$value" />;<xsl:call-template name="motion2">
+				<xsl:with-param name="cnt" select="$cnt + 1" />
+				<xsl:with-param name="max" select="$max" />
+				<xsl:with-param name="value"><xsl:value-of select="$value" />L<xsl:call-template name="calc"><xsl:with-param name="x" select="$cnt" /><xsl:with-param name="m" select="$max" /></xsl:call-template></xsl:with-param>
+			</xsl:call-template>
+		</xsl:if>
+	</xsl:template>
+
+</xsl:stylesheet>
