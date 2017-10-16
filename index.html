@@ -51,31 +51,42 @@ so it taks several seconds to display.<br />
 <p>
 <h3>ライブラリの使い方 How  to use library</h3>
 <pre>
-&lt;xsl:call-template name="math_func_name"&gt;&lt;xsl:with-param name="arg" select="arg_value" /&gt;&lt;/xsl:call-template&gt;
+&lt;xsl:call-template name="<span>math_func_name</span>"&gt;
+&lt;xsl:with-param name="arg" select="arg_value" /&gt;
+&lt;!--
+&lt;xsl:with-param name="base" select="base_value" /&gt;
+--&gt;
+&lt;/xsl:call-template&gt;
 </pre>
 </p>
 <section>
 <p>
 実装済み関数　Implemented formulas
 <ul>
-<li>(#text double) = cos(arg)<br />
-  </li>
-<li>(#text double) = exp(arg)<br />
-  </li>
-<li>(#text double) = sqrt(arg)   arg &gt; 0<br />
-  </li>
-<li>(#text double) = ln(arg)   arg &gt; 0<br />
-  </li>
+<li>(double) #text = <span>cos</span>[(double) arg]<br />
+</li>
+<li>(double) #text = <span>exp</span>[(double) arg]<br />
+</li>
+<li>(double) #text = <span>sqrt</span>[(double) arg]   arg &gt; 0<br />
+</li>
+<li>(double) #text = <span>ln</span>[(double) arg]   arg &gt; 0<br />
+</li>
 </ul>
 <ul>
-<li>(#text double) = sin(arg)<br />
-  </li>
-<li>(#text double) = tan(arg)<br />
-  </li>
-<li>(#text double) = log(base,arg)<br />
-  </li>
-<li>(#text double) = pow(base,arg)<br />
-  </li>
+<li>(double) #text = <span>sin</span>[(double) arg]<br />
+</li>
+<li>(double) #text = <span>tan</span>[(double) arg]<br />
+</li>
+<li>(double) #text = <span>log</span>[(double) base , (double) arg]   arg &gt; 0 , base &gt; 0<br />
+</li>
+<li>(double) #text = <span>pow</span>[(double) base , (double) arg]   base &gt; 0<br />
+</li>
+</ul>
+<ul>
+<li>(int) #text = <span>sgn</span>[(double) arg]<br />
+</li>
+<li>(double) #text = <span>abs</span>[(double) arg]<br />
+</li>
 </ul>
 </p>
 <p>
