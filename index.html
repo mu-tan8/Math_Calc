@@ -69,6 +69,16 @@ so it taks several seconds to display.<br />
 </p>
 <section>
 <p>
+定義済みグローバル変数　Predefined global variables
+<ul>
+<li>$BIG_NUM (for increase precision number) = 10^(56)</li>
+<li>$MAX_VALUE (don't use calculation number) = 10^(308)</li>
+<li>π $Math_PI = 3.14159265358979</li>
+<li>exp(1) $Math_E = 2.718281828459045</li>
+<li>ln(2) $Math_LN2 = 0.693147180559945</li>
+</ul>
+</p>
+<p>
 実装済み関数　Implemented formulas
 <ul>
 <li>(double) #text = <span class="func_name">cos</span>[(double) arg]<br />
@@ -84,14 +94,14 @@ return of the natural exponent value of "arg".<br />
 <li>(double) #text = <span class="func_name">sqrt</span>[(double) arg]   arg &gt; 0<br />
 "arg"に対する平方根を返す<br />
 return of the square root value for "arg".<br />
-"arg"が0以下なら空文字となる<br />
+"arg"が0以上でなければ空文字となる<br />
 if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
 <li>(double) #text = <span class="func_name">ln</span>[(double) arg]   arg &gt; 0<br />
 "arg"に対する自然対数を返す<br />
 return of the natural logarithm value for "arg".<br />
-"arg"が0以下なら空文字となる<br />
+"arg"が0以上でなければ空文字となる<br />
 if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
@@ -110,14 +120,14 @@ return of the tangent value for "arg".<br />
 <li>(double) #text = <span class="func_name">log</span>[(double) base , (double) arg]   arg &gt; 0 , base &gt; 0<br />
 "base"を底とする"arg"の対数を返す<br />
 return of the logarithm whose base is "base" for "arg".<br />
-"arg"または"base"が0以下なら空文字となる<br />
+"arg"または"base"が0以上でなければ空文字となる<br />
 if value of arg or base was out of range, than empty text.<br />
 <br />
 </li>
 <li>(double) #text = <span class="func_name">pow</span>[(double) base , (double) arg]   base &gt; 0<br />
 "base"を底とする"arg"の指数を返す<br />
 return of the exponent whose base is "base" for "arg".<br />
-"base"が以下なら空文字となる<br />
+"base"が0以上でなければ空文字となる<br />
 if value of base was out of range, than empty text.<br />
 <br />
 </li>
@@ -135,16 +145,6 @@ otherwise value of 0.<br />
 return of absolute value for "arg".<br />
 <br />
 </li>
-</ul>
-</p>
-<p>
-定義済みグローバル変数　Predefined global variables
-<ul>
-<li>$BIG_NUM (for increase precision number) = 10^(56)</li>
-<li>$MAX_VALUE (don't use calculation number) = 10^(308)</li>
-<li>π $Math_PI = 3.14159265358979</li>
-<li>exp(1) $Math_E = 2.718281828459045</li>
-<li>ln(2) $Math_LN2 = 0.693147180559945</li>
 </ul>
 </p>
 </section>
