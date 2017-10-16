@@ -25,33 +25,6 @@ How to use this library is referance call as "xsl:include" for your XSLT.<br />
 </section>
 <section>
 <p>
-実装済み関数　Implemented formulas
-<ul>
-<li>cos(arg)</li>
-<li>exp(arg)</li>
-<li>sqrt(arg)</li>
-<li>ln(arg)</li>
-</ul>
-<ul>
-<li>sin(arg)</li>
-<li>tan(arg)</li>
-<li>log(base,arg)</li>
-<li>pow(base,arg)</li>
-</ul>
-</p>
-<p>
-定義済みグローバル変数　Predefined global variables
-<ul>
-<li>$BIG_NUM (for increase precision number) = 10^(56)</li>
-<li>$MAX_VALUE (don't use calculation number) = 10^(308)</li>
-<li>π $Math_PI = 3.14159265358979</li>
-<li>exp(1) $Math_E = 2.718281828459045</li>
-<li>ln(2) $Math_LN2 = 0.693147180559945</li>
-</ul>
-</p>
-</section>
-<section>
-<p>
   <h3>links</h3>
 <ul>
 <li><a href="https://github.com/mu-tan8/Math_Calc/">library Project</a><br />
@@ -68,6 +41,47 @@ notice : this page process the library on your browser,<br />
 so it taks several seconds to display.<br />
 </div>
 </li>
+</ul>
+</p>
+</section>
+<p>
+<h3>ライブラリの使い方 How  to use library</h3>
+<pre><![CDATA[
+<xsl:call-template name="math_func_name"><xsl:with-param name="arg" select="arg_value" /></xsl:call-template>
+]]></pre>
+</p>
+<section>
+<p>
+実装済み関数　Implemented formulas
+<ul>
+<li>(#text double) = cos(arg)<br />
+  </li>
+<li>(#text double) = exp(arg)<br />
+  </li>
+<li>(#text double) = sqrt(arg)   arg &gt; 0<br />
+  </li>
+<li>(#text double) = ln(arg)   arg &gt; 0<br />
+  </li>
+</ul>
+<ul>
+<li>(#text double) = sin(arg)<br />
+  </li>
+<li>(#text double) = tan(arg)<br />
+  </li>
+<li>(#text double) = log(base,arg)<br />
+  </li>
+<li>(#text double) = pow(base,arg)<br />
+  </li>
+</ul>
+</p>
+<p>
+定義済みグローバル変数　Predefined global variables
+<ul>
+<li>$BIG_NUM (for increase precision number) = 10^(56)</li>
+<li>$MAX_VALUE (don't use calculation number) = 10^(308)</li>
+<li>π $Math_PI = 3.14159265358979</li>
+<li>exp(1) $Math_E = 2.718281828459045</li>
+<li>ln(2) $Math_LN2 = 0.693147180559945</li>
 </ul>
 </p>
 </section>
