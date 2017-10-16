@@ -25,6 +25,10 @@ How to use this library is referance call as "xsl:include" for your XSLT.
 + ファイル名の変更自由　renameable filename
 
 
+このライブラリを用いて創られた著作物の権利は利用者に帰属する
+
+The rights of the work created using this library belong to the user. 
+
 
 ### 実装済み関数　Implemented formulas
 
