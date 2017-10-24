@@ -37,10 +37,18 @@ The rights of the work created using this library belong to the user.
 + exp(arg)
 + sqrt(arg) arg > 0
 + ln(arg) arg > 0
-
++ atan(arg)
++ cosh(arg)
 
 + sin(arg)
 + tan(arg)
++ acos(arg) -1 < arg <= 1
++ asin(arg)
++ tanh(arg)
++ sinh(arg)
++ asinh(arg)
++ atanh(arg) -1 < arg < 1
++ acosh(arg) arg > 1
 + log(base,arg) base > 0 , arg > 0
 + pow(base,arg) base > 0
 
