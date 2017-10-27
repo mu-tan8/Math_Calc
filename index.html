@@ -160,7 +160,7 @@ return of the tangent value for "arg".<br />
 <br />
 </li>
 <li>
-<h4>(double) #text = <span class="func_name">acos</span>[(double) arg]	-1 &gt; arg &gt;= 1</h4>
+<h4>(double) #text = <span class="func_name">acos</span>[(double) arg]	(	-1 &lt; arg &lt; 1	)</h4>
 "arg"に対する逆余弦を返す<br />
 return of the arc-cosine value of "arg".<br />
 "arg"が-1以上1以下でなければ空文字となる<br />
@@ -168,7 +168,7 @@ if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
 <li>
-<h4>(double) #text = <span class="func_name">asin</span>[(double) arg]</h4>
+<h4>(double) #text = <span class="func_name">asin</span>[(double) arg]	(	-1 &lt; arg &lt; 1	)</h4>
 "arg"に対する逆正弦を返す<br />
 return of the arc-sine value of "arg".<br />
 <br />
@@ -190,7 +190,7 @@ if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
 <li>
-<h4>(double) #text = <span class="func_name">log</span>[(double) base , (double) arg]   arg &gt; 0 , base &gt; 0</h4>
+<h4>(double) #text = <span class="func_name">log</span>[(double) base , (double) arg]   (	arg &gt; 0 , base &gt; 0	)</h4>
 "base"を底とする"arg"の対数を返す<br />
 return of the logarithm whose base is "base" for "arg".<br />
 "arg"または"base"が0以上でなければ空文字となる<br />
@@ -214,7 +214,7 @@ if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
 <li>
-<h4>(double) #text = <span class="func_name">atanh</span>[(double) arg]	-1 &gt; arg &gt; 1</h4>
+<h4>(double) #text = <span class="func_name">atanh</span>[(double) arg]	(	-1 &lt; arg &lt; 1	)</h4>
 "arg"に対する逆双曲線正接を返す<br />
 return of the area-hyperboli-tangent value of "arg".<br />
 "arg"が-1以上1未満かつ計算範囲内でなければ空文字となる<br />
@@ -222,7 +222,7 @@ if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
 <li>
-<h4>(double) #text = <span class="func_name">pow</span>[(double) base , (double) arg]   base &gt; 0</h4>
+<h4>(double) #text = <span class="func_name">pow</span>[(double) base , (double) arg]	(	base &gt; 0	)</h4>
 "base"を底とする"arg"の指数を返す<br />
 return of the exponent whose base is "base" for "arg".<br />
 "base"が0以上でなければ空文字となる<br />
@@ -234,9 +234,9 @@ if value of base was out of range, than empty text.<br />
 <li>
 <h4>(int) #text = <span class="func_name">sgn</span>[(double) arg]</h4>
 "arg"が正の実数なら1、負の実数なら-1、いずれでもなければ0を返す<br />
-return if value of "arg" was a positive real number than 1,<br />
-else if value of a negative real number than -1,<br />
-otherwise value of 0.<br />
+return if value of "arg" is a positive real number than 1,<br />
+else if value of it's a negative real number than -1,<br />
+otherwise value of it's 0.<br />
 <br />
 </li>
 <li>
