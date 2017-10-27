@@ -35,22 +35,22 @@ The rights of the work created using this library belong to the user.
 
 + cos(arg)
 + exp(arg)
-+ sqrt(arg) arg > 0
-+ ln(arg) arg > 0
++ sqrt(arg)	arg > 0
++ ln(arg)	arg > 0
 + atan(arg)
 + cosh(arg)
 
 + sin(arg)
 + tan(arg)
-+ acos(arg) -1 < arg <= 1
-+ asin(arg)
++ acos(arg)	-1 < arg < 1
++ asin(arg)	-1 < arg < 1
 + tanh(arg)
 + sinh(arg)
 + asinh(arg)
-+ atanh(arg) -1 < arg < 1
-+ acosh(arg) arg > 1
-+ log(base,arg) base > 0 , arg > 0
-+ pow(base,arg) base > 0
++ atanh(arg)	-1 < arg < 1
++ acosh(arg)	arg > 1
++ log(base,arg)	base > 0 , arg > 0
++ pow(base,arg)	base > 0
 
 
 + sgn(arg) 
@@ -59,7 +59,7 @@ The rights of the work created using this library belong to the user.
 
 ### 定義済みグローバル変数　Predefined global variables
 
-+ (for increase precision number) $BIG_NUM = 10^(56)
++ (for increase precision number) $BIG_NUM = 10^(16)
 + (don't use calculation number) $MAX_VALUE = 10^(308)
 + π $Math_PI = 3.14159265358979
 + exp(1) $Math_E = 2.718281828459045

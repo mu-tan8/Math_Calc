@@ -34,11 +34,11 @@
 	Mathematical constant
 
 
-	$Math_PI = 3.141592653589793
+	$Math_PI = 3.14159265358979
 
 	$Math_E = 2.718281828459045
 
-	$Math_LN2 = 0.6931471805599453
+	$Math_LN2 = 0.693147180559945
 
 
 
@@ -49,23 +49,28 @@
 		sin([@arg="double:$radian"])
 		tan([@arg="double:$radian"])	
 	atan([@arg="double:$real"])
-		asin([@arg="double:$real"])
-		acos([@arg="double:$real"]) -1 < arg <= 1
+		asin([@arg="double:$real"])		-1 < arg < 1
+		acos([@arg="double:$real"])		-1 < arg < 1
 	exp([@arg="double:$real"])
 		tanh([@arg="double:$real"])
 	cosh([@arg="double:$real"])
 		sinh([@arg="double:$real"])
-	sqrt([@arg="double:$real"])	arg > 0
-	ln([@arg="double:$real"])	arg > 0
-		log([@arg="double:$real",@base="double:$real"])	arg > 0 , base > 0
-		pow([@arg="double:$real",@base="double:$real"]) base > 0
+	sqrt([@arg="double:$real"])		arg > 0
+	ln([@arg="double:$real"])		arg > 0
+		log([@arg="double:$real",@base="double:$real"])		arg > 0 , base > 0
+		pow([@arg="double:$real",@base="double:$real"])		base > 0
 		asinh([@arg="double:$real"])
-		acosh([@arg="double:$real"]) arg > 1
-		atanh([@arg="double:$real"]) -1 < arg < 1
+		acosh([@arg="double:$real"])		arg > 1
+		atanh([@arg="double:$real"])		-1 < arg < 1
 	sgn([@arg="double:$real"])
 		abs([@arg="double:$real"])
 
 	 Reference materials :
+
+
+		C言語による最新アルゴリズム事典　Author:奥村晴彦
+
+
 
 		乱数と暗号の部屋　（暗号工房）
 
@@ -240,24 +245,15 @@
 			<xsl:with-param name="value" select="1" />
 		</xsl:call-template>
 	</xsl:variable>
+	<xsl:variable name="x">
+		<xsl:call-template name="abs"><xsl:with-param name="arg" select="$arg" /></xsl:call-template>
+	</xsl:variable>
 	<xsl:variable name="v2">
-		<xsl:choose>
-			<xsl:when test="$arg &lt; 0">
-				<xsl:variable name="s"><xsl:choose><xsl:when test="($m mod 2) = 0"><xsl:value-of select="1" /></xsl:when><xsl:otherwise><xsl:value-of select="-1" /></xsl:otherwise></xsl:choose></xsl:variable>
-				<xsl:call-template name="__for_nexp">
-					<xsl:with-param name="p" select="$m - 1" />
-					<xsl:with-param name="x" select="-($arg * $BIG_NUM div $v1) div $BIG_NUM" />
-					<xsl:with-param name="value" select="($BIG_NUM div $init_val * $s) div $BIG_NUM" />
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:call-template name="__for_pexp">
-					<xsl:with-param name="p" select="$m - 1" />
-					<xsl:with-param name="x" select="($arg * $BIG_NUM div $v1) div $BIG_NUM" />
-					<xsl:with-param name="value" select="($BIG_NUM div $init_val) div $BIG_NUM" />
-				</xsl:call-template>
-			</xsl:otherwise>
-		</xsl:choose>
+		<xsl:call-template name="__for_pexp">
+			<xsl:with-param name="p" select="$m - 1" />
+			<xsl:with-param name="x" select="($x * $BIG_NUM div $v1) div $BIG_NUM" />
+			<xsl:with-param name="value" select="($BIG_NUM div $init_val) div $BIG_NUM" />
+		</xsl:call-template>
 	</xsl:variable>
 	<xsl:variable name="v3">
 		<xsl:call-template name="__while_exp">
@@ -266,7 +262,10 @@
 			<xsl:with-param name="value" select="$v2" />
 		</xsl:call-template>
 	</xsl:variable>
-	<xsl:value-of select="$v3 + 1" />
+	<xsl:choose>
+		<xsl:when test="$arg &lt; 0"><xsl:value-of select="1 div ($v3 + 1)" /></xsl:when>	<!--	C言語による最新アルゴリズム事典　指数関数	-->
+		<xsl:otherwise><xsl:value-of select="$v3 + 1" /></xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 	<xsl:template name="__for_pexp">
@@ -287,30 +286,6 @@
 					<xsl:with-param name="p" select="$p - 1" />
 					<xsl:with-param name="x" select="$x" />
 					<xsl:with-param name="value" select="($value * $x) + $y" />
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="($value * $x) div $BIG_NUM" /></xsl:otherwise>
-		</xsl:choose>
-	</xsl:template>
-
-	<xsl:template name="__for_nexp">
-		<xsl:param name="p" />
-		<xsl:param name="x" />
-		<xsl:param name="value" />
-		<xsl:variable name="w">
-			<xsl:call-template name="_fact">
-				<xsl:with-param name="cnt" select="1" />
-				<xsl:with-param name="arg" select="$p" />
-				<xsl:with-param name="value" select="1" />
-			</xsl:call-template>
-		</xsl:variable>
-		<xsl:variable name="y" select="$BIG_NUM div $w" />
-		<xsl:choose>
-			<xsl:when test="$p &gt; 0">
-				<xsl:call-template name="__for_nexp">
-					<xsl:with-param name="p" select="$p - 1" />
-					<xsl:with-param name="x" select="$x" />
-					<xsl:with-param name="value" select="-(($value * $x) + $y)" />
 				</xsl:call-template>
 			</xsl:when>
 			<xsl:otherwise><xsl:value-of select="($value * $x) div $BIG_NUM" /></xsl:otherwise>
@@ -699,12 +674,14 @@
 
 <xsl:template name="atanh">
 	<xsl:param name="arg" />
-	<xsl:variable name="value">
-		<xsl:call-template name="ln">
-			<xsl:with-param name="arg" select="(1.0 + $arg) * $BIG_NUM div ((1.0 - $arg) * $BIG_NUM)" />
-		</xsl:call-template>
-	</xsl:variable>
-	<xsl:value-of select="$value div 2" />
+	<xsl:if test="($arg * $arg) &lt; 1">
+		<xsl:variable name="value">
+			<xsl:call-template name="ln">
+				<xsl:with-param name="arg" select="(1.0 + $arg) * $BIG_NUM div ((1.0 - $arg) * $BIG_NUM)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:value-of select="$value div 2" />
+	</xsl:if>
 </xsl:template>
 
 <xsl:template name="pow">
@@ -719,7 +696,7 @@
 				<xsl:with-param name="value" select="1" />
 			</xsl:call-template>
 		</xsl:when>
-		<xsl:otherwise>
+		<xsl:otherwise>				<!--	C言語による最新アルゴリズム　累乗	-->
 			<xsl:variable name="lnC">
 				<xsl:call-template name="ln">
 					<xsl:with-param name="arg" select="$base" />
@@ -772,32 +749,36 @@
 
 <xsl:template name="asin">
 	<xsl:param name="arg" />
-	<xsl:variable name="sqr">
-		<xsl:call-template name="sqrt">
-			<xsl:with-param name="arg" select="1.0 - ($arg * $arg)" />
-		</xsl:call-template>
-	</xsl:variable>
-	<xsl:variable name="value">
-		<xsl:call-template name="atan">
-			<xsl:with-param name="arg" select="$arg div ($sqr + 1)" />
-		</xsl:call-template>
-	</xsl:variable>
-	<xsl:value-of select="$value * 2" />
+	<xsl:if test="($arg * $arg) &lt; 1">
+		<xsl:variable name="sqr">
+			<xsl:call-template name="sqrt">
+				<xsl:with-param name="arg" select="1.0 - ($arg * $arg)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="value">
+			<xsl:call-template name="atan">
+				<xsl:with-param name="arg" select="$arg div ($sqr + 1)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:value-of select="$value * 2" />
+	</xsl:if>
 </xsl:template>
 
 <xsl:template name="acos">
 	<xsl:param name="arg" />
-	<xsl:variable name="sqr">
-		<xsl:call-template name="sqrt">
-			<xsl:with-param name="arg" select="1.0 - ($arg * $arg)" />
-		</xsl:call-template>
-	</xsl:variable>
-	<xsl:variable name="value">
-		<xsl:call-template name="atan">
-			<xsl:with-param name="arg" select="$sqr div ($arg + 1)" />
-		</xsl:call-template>
-	</xsl:variable>
-	<xsl:value-of select="$value * 2" />
+	<xsl:if test="($arg * $arg) &lt; 1">
+		<xsl:variable name="sqr">
+			<xsl:call-template name="sqrt">
+				<xsl:with-param name="arg" select="1.0 - ($arg * $arg)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:variable name="value">
+			<xsl:call-template name="atan">
+				<xsl:with-param name="arg" select="$sqr div ($arg + 1)" />
+			</xsl:call-template>
+		</xsl:variable>
+		<xsl:value-of select="$value * 2" />
+	</xsl:if>
 </xsl:template>
 
 <xsl:template name="sgn">
