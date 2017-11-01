@@ -149,7 +149,7 @@
 					<xsl:with-param name="s" select="((($arg div $s) + $s) * $BIG_NUM div 2) div $BIG_NUM" />
 				</xsl:call-template>
 			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="$s" /></xsl:otherwise>
+			<xsl:otherwise><xsl:value-of select="((($arg div $s) + $s) * $BIG_NUM div 2) div $BIG_NUM" /></xsl:otherwise>
 		</xsl:choose>
 	</xsl:template>
 <!--	End Sqrt	-->
@@ -160,16 +160,18 @@
 	<xsl:param name="arg" />
 	<xsl:if test="$arg &gt; 0">
 		<xsl:variable name="m" select="20" />
-		<xsl:variable name="init" select="2.0 * $BIG_NUM div ($m * 2 + 1)" />
+		<xsl:variable name="init" select="2 * $BIG_NUM div ($m * 2 + 1)" />
+		<xsl:variable name="s"><xsl:choose><xsl:when test="$arg &lt; 1"><xsl:value-of select="-1" /></xsl:when><xsl:otherwise><xsl:value-of select="1" /></xsl:otherwise></xsl:choose></xsl:variable>
+		<xsl:variable name="v"><xsl:choose><xsl:when test="$arg &lt; 1"><xsl:value-of select="1 div $arg" /></xsl:when><xsl:otherwise><xsl:value-of select="$arg" /></xsl:otherwise></xsl:choose></xsl:variable>
 		<xsl:variable name="v1">
 			<xsl:call-template name="__while_ln">
 				<xsl:with-param name="i" select="0" />
-				<xsl:with-param name="n" select="$arg" />
+				<xsl:with-param name="n" select="$v" />
 			</xsl:call-template>
 		</xsl:variable>
 		<xsl:variable name="n" select="number(substring-before($v1,','))" />
 		<xsl:variable name="i" select="number(substring-after($v1,','))" />
-		<xsl:variable name="x" select="(($n - 1.0) * $BIG_NUM div ($n + 1.0)) div $BIG_NUM" />
+		<xsl:variable name="x" select="(($n - 1) * $BIG_NUM div ($n + 1)) div $BIG_NUM" />
 		<xsl:variable name="v2">
 			<xsl:call-template name="__for_ln">
 				<xsl:with-param name="cnt" select="$m - 1" />
@@ -185,7 +187,7 @@
 				<xsl:with-param name="value" select="1" />
 			</xsl:call-template>
 		</xsl:variable>
-		<xsl:value-of select="$v3 * $v2" />
+		<xsl:value-of select="$v2 * $v3 * $s" />
 	</xsl:if>
 </xsl:template>
 
@@ -828,17 +830,19 @@
 		<xsl:param name="pow" />
 		<xsl:param name="base" />
 		<xsl:param name="value" />
-		<xsl:choose>
-			<xsl:when test="$cnt &lt; $pow">
-				<xsl:call-template name="__while__ppow">
-					<xsl:with-param name="cnt" select="$cnt + 1" />
-					<xsl:with-param name="pow" select="$pow" />
-					<xsl:with-param name="base" select="$base" />
-					<xsl:with-param name="value" select="$value * $base" />
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:choose>
+				<xsl:when test="$cnt &lt; $pow">
+					<xsl:call-template name="__while__ppow">
+						<xsl:with-param name="cnt" select="$cnt + 1" />
+						<xsl:with-param name="pow" select="$pow" />
+						<xsl:with-param name="base" select="$base" />
+						<xsl:with-param name="value" select="$value * $base" />
 				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
-		</xsl:choose>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="__while__npow">
@@ -874,15 +878,17 @@
 <xsl:template name="__for__fact">
 	<xsl:param name="cnt" />
 	<xsl:param name="value" />
-	<xsl:choose>
-		<xsl:when test="$cnt &gt; 0">
-			<xsl:call-template name="__for__fact">
-				<xsl:with-param name="cnt" select="$cnt - 1" />
-				<xsl:with-param name="value" select="$value * $cnt" />
-			</xsl:call-template>
-		</xsl:when>
-		<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
-	</xsl:choose>
+	<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+		<xsl:choose>
+			<xsl:when test="$cnt &gt; 0">
+				<xsl:call-template name="__for__fact">
+						<xsl:with-param name="cnt" select="$cnt - 1" />
+					<xsl:with-param name="value" select="$value * $cnt" />
+				</xsl:call-template>
+			</xsl:when>
+			<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
+		</xsl:choose>
+	</xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>
