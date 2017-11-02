@@ -176,7 +176,7 @@
 			<xsl:call-template name="__for_ln">
 				<xsl:with-param name="cnt" select="$m - 1" />
 				<xsl:with-param name="x" select="$x" />
-				<xsl:with-param name="y" select="$init * $x div $BIG_NUM" />
+				<xsl:with-param name="value" select="$init * $x div $BIG_NUM" />
 			</xsl:call-template>
 		</xsl:variable>
 		<xsl:variable name="v3">
@@ -213,17 +213,19 @@
 	<xsl:template name="__for_ln">
 		<xsl:param name="cnt" />
 		<xsl:param name="x" />
-		<xsl:param name="y" />
-		<xsl:choose>
-			<xsl:when test="$cnt &gt;= 0">
-				<xsl:call-template name="__for_ln">
-					<xsl:with-param name="cnt" select="$cnt - 1" />
-					<xsl:with-param name="x" select="$x" />
-					<xsl:with-param name="y" select="$y * ($x * $x) + ((2 * $BIG_NUM div ($cnt * 2 + 1)) * $x)"  />
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="$y div $BIG_NUM" /></xsl:otherwise>
-		</xsl:choose>
+		<xsl:param name="value" />
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:choose>
+				<xsl:when test="$cnt &gt;= 0">
+					<xsl:call-template name="__for_ln">
+						<xsl:with-param name="cnt" select="$cnt - 1" />
+						<xsl:with-param name="x" select="$x" />
+						<xsl:with-param name="value" select="$value * ($x * $x) + ((2 * $BIG_NUM div ($cnt * 2 + 1)) * $x)"  />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="$value div $BIG_NUM" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 <!--	End LN	-->
 
@@ -251,7 +253,7 @@
 		<xsl:call-template name="abs"><xsl:with-param name="arg" select="$arg" /></xsl:call-template>
 	</xsl:variable>
 	<xsl:variable name="v2">
-		<xsl:call-template name="__for_pexp">
+		<xsl:call-template name="__for_exp">
 			<xsl:with-param name="p" select="$m - 1" />
 			<xsl:with-param name="x" select="($x * $BIG_NUM div $v1) div $BIG_NUM" />
 			<xsl:with-param name="value" select="($BIG_NUM div $init_val) div $BIG_NUM" />
@@ -264,50 +266,54 @@
 			<xsl:with-param name="value" select="$v2" />
 		</xsl:call-template>
 	</xsl:variable>
-	<xsl:choose>
-		<xsl:when test="$arg &lt; 0"><xsl:value-of select="1 div ($v3 + 1)" /></xsl:when>	<!--	C言語による最新アルゴリズム事典　指数関数	-->
+	<xsl:choose>					<!--	C言語による最新アルゴリズム事典　指数関数	-->
+		<xsl:when test="$arg &lt; 0"><xsl:value-of select="1 div ($v3 + 1)" /></xsl:when>
 		<xsl:otherwise><xsl:value-of select="$v3 + 1" /></xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
-	<xsl:template name="__for_pexp">
+	<xsl:template name="__for_exp">
 		<xsl:param name="p" />
 		<xsl:param name="x" />
 		<xsl:param name="value" />
-		<xsl:variable name="w">
-			<xsl:call-template name="_fact">
-				<xsl:with-param name="cnt" select="1" />
-				<xsl:with-param name="arg" select="$p" />
-				<xsl:with-param name="value" select="1" />
-			</xsl:call-template>
-		</xsl:variable>
-		<xsl:variable name="y" select="$BIG_NUM div $w" />
-		<xsl:choose>
-			<xsl:when test="$p &gt; 0">
-				<xsl:call-template name="__for_pexp">
-					<xsl:with-param name="p" select="$p - 1" />
-					<xsl:with-param name="x" select="$x" />
-					<xsl:with-param name="value" select="($value * $x) + $y" />
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:variable name="w">
+				<xsl:call-template name="_fact">
+					<xsl:with-param name="cnt" select="1" />
+					<xsl:with-param name="arg" select="$p" />
+					<xsl:with-param name="value" select="1" />
 				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="($value * $x) div $BIG_NUM" /></xsl:otherwise>
-		</xsl:choose>
+			</xsl:variable>
+			<xsl:variable name="y" select="$BIG_NUM div $w" />
+			<xsl:choose>
+				<xsl:when test="$p &gt; 0">
+				<xsl:call-template name="__for_exp">
+						<xsl:with-param name="p" select="$p - 1" />
+						<xsl:with-param name="x" select="$x" />
+						<xsl:with-param name="value" select="($value * $x) + $y" />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="($value * $x) div $BIG_NUM" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="__while_exp">
 		<xsl:param name="i" />
 		<xsl:param name="max" />
 		<xsl:param name="value" />
-		<xsl:choose>
-			<xsl:when test="$i &lt; $max">
-				<xsl:call-template name="__while_exp">
-					<xsl:with-param name="i" select="$i + 1" />
-					<xsl:with-param name="max" select="$max" />
-					<xsl:with-param name="value" select="$value * ($value + 2)" />
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
-		</xsl:choose>
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:choose>
+				<xsl:when test="$i &lt; $max">
+					<xsl:call-template name="__while_exp">
+						<xsl:with-param name="i" select="$i + 1" />
+						<xsl:with-param name="max" select="$max" />
+						<xsl:with-param name="value" select="$value * ($value + 2)" />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 <!--	End Exp	-->
 
@@ -351,40 +357,44 @@
 		<xsl:param name="p" />
 		<xsl:param name="x" />
 		<xsl:param name="value" />
-		<xsl:variable name="w">
-			<xsl:call-template name="_fact">
-				<xsl:with-param name="cnt" select="1" />
-				<xsl:with-param name="arg" select="$p * 2" />
-				<xsl:with-param name="value" select="1" />
-			</xsl:call-template>
-		</xsl:variable>
-		<xsl:variable name="y" select="((2 * $BIG_NUM div $w) div $BIG_NUM)" />
-		<xsl:choose>
-			<xsl:when test="$p &gt; 0">
-				<xsl:call-template name="__for_cosh">
-					<xsl:with-param name="p" select="$p - 1" />
-					<xsl:with-param name="x" select="$x" />
-					<xsl:with-param name="value" select="($value * ($x * $x)) + $y" />
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:variable name="w">
+				<xsl:call-template name="_fact">
+					<xsl:with-param name="cnt" select="1" />
+					<xsl:with-param name="arg" select="$p * 2" />
+					<xsl:with-param name="value" select="1" />
 				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="($value - 2) * ($x * $x)" /></xsl:otherwise>
-		</xsl:choose>
+			</xsl:variable>
+			<xsl:variable name="y" select="((2 * $BIG_NUM div $w) div $BIG_NUM)" />
+			<xsl:choose>
+				<xsl:when test="$p &gt; 0">
+					<xsl:call-template name="__for_cosh">
+						<xsl:with-param name="p" select="$p - 1" />
+						<xsl:with-param name="x" select="$x" />
+						<xsl:with-param name="value" select="($value * ($x * $x)) + $y" />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="($value - 2) * ($x * $x)" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="__while_cosh">
 		<xsl:param name="i" />
 		<xsl:param name="max" />
 		<xsl:param name="value" />
-		<xsl:choose>
-			<xsl:when test="$i &lt; $max">
-				<xsl:call-template name="__while_cosh">
-					<xsl:with-param name="i" select="$i + 1" />
-					<xsl:with-param name="max" select="$max" />
-					<xsl:with-param name="value" select="$value * (4.0 - $value)" />
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
-		</xsl:choose>
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:choose>
+				<xsl:when test="$i &lt; $max">
+					<xsl:call-template name="__while_cosh">
+						<xsl:with-param name="i" select="$i + 1" />
+						<xsl:with-param name="max" select="$max" />
+						<xsl:with-param name="value" select="$value * (4.0 - $value)" />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 <!--	End Cosh	-->
 
@@ -511,40 +521,44 @@
 		<xsl:param name="p" />
 		<xsl:param name="x" />
 		<xsl:param name="value" />
-		<xsl:variable name="w">
-			<xsl:call-template name="_fact">
-				<xsl:with-param name="cnt" select="1" />
-				<xsl:with-param name="arg" select="$p * 2" />
-				<xsl:with-param name="value" select="1" />
-			</xsl:call-template>
-		</xsl:variable>
-		<xsl:variable name="y" select="((2 * $BIG_NUM div $w) div $BIG_NUM)" />
-		<xsl:choose>
-			<xsl:when test="$p &gt; 0">
-				<xsl:call-template name="__for_cos">
-					<xsl:with-param name="p" select="$p - 1" />
-					<xsl:with-param name="x" select="$x" />
-					<xsl:with-param name="value" select="-(($value * ($x * $x)) + $y)" />
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:variable name="w">
+				<xsl:call-template name="_fact">
+					<xsl:with-param name="cnt" select="1" />
+					<xsl:with-param name="arg" select="$p * 2" />
+					<xsl:with-param name="value" select="1" />
 				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="-($value * ($x * $x))" /></xsl:otherwise>
-		</xsl:choose>
+			</xsl:variable>
+			<xsl:variable name="y" select="((2 * $BIG_NUM div $w) div $BIG_NUM)" />
+			<xsl:choose>
+				<xsl:when test="$p &gt; 0">
+					<xsl:call-template name="__for_cos">
+						<xsl:with-param name="p" select="$p - 1" />
+						<xsl:with-param name="x" select="$x" />
+						<xsl:with-param name="value" select="-(($value * ($x * $x)) + $y)" />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="-($value * ($x * $x))" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 
 	<xsl:template name="__while_cos">
 		<xsl:param name="i" />
 		<xsl:param name="max" />
 		<xsl:param name="value" />
-		<xsl:choose>
-			<xsl:when test="$i &lt; $max">
-				<xsl:call-template name="__while_cos">
-					<xsl:with-param name="i" select="$i + 1" />
-					<xsl:with-param name="max" select="$max" />
-					<xsl:with-param name="value" select="$value * (4.0 - $value)" />
-				</xsl:call-template>
-			</xsl:when>
-			<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
-		</xsl:choose>
+		<xsl:if test="not(contains(number($value),'Infinity')) and not(contains(number($value),'NaN'))">
+			<xsl:choose>
+				<xsl:when test="$i &lt; $max">
+					<xsl:call-template name="__while_cos">
+						<xsl:with-param name="i" select="$i + 1" />
+						<xsl:with-param name="max" select="$max" />
+						<xsl:with-param name="value" select="$value * (4.0 - $value)" />
+					</xsl:call-template>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="$value" /></xsl:otherwise>
+			</xsl:choose>
+		</xsl:if>
 	</xsl:template>
 <!--	End Cos	-->
 
@@ -652,25 +666,32 @@
 			<xsl:with-param name="arg" select="$arg * $arg + 1" />
 		</xsl:call-template>
 	</xsl:variable>
-	<xsl:call-template name="ln">
-		<xsl:with-param name="arg" select="$arg + $sqr" />
-	</xsl:call-template>
+	<xsl:choose>				<!--	C言語による最新アルゴリズム事典　逆双曲線関数	-->
+		<xsl:when test="$arg &lt; 0">
+			<xsl:variable name="value">
+				<xsl:call-template name="ln">
+					<xsl:with-param name="arg" select="$sqr - $arg" />
+				</xsl:call-template>
+			</xsl:variable>
+			<xsl:value-of select="- $value" />
+		</xsl:when>
+		<xsl:otherwise>
+			<xsl:call-template name="ln">
+				<xsl:with-param name="arg" select="$arg + $sqr" />
+			</xsl:call-template>
+		</xsl:otherwise>
+	</xsl:choose>
 </xsl:template>
 
 <xsl:template name="acosh">
 	<xsl:param name="arg" />
-	<xsl:variable name="psqr">
+	<xsl:variable name="sqr">
 		<xsl:call-template name="sqrt">
-			<xsl:with-param name="arg" select="$arg + 1" />
-		</xsl:call-template>
-	</xsl:variable>
-	<xsl:variable name="nsqr">
-		<xsl:call-template name="sqrt">
-			<xsl:with-param name="arg" select="$arg - 1" />
+			<xsl:with-param name="arg" select="$arg * $arg - 1" />
 		</xsl:call-template>
 	</xsl:variable>
 	<xsl:call-template name="ln">
-		<xsl:with-param name="arg" select="$arg + $psqr * $nsqr" />
+		<xsl:with-param name="arg" select="$arg + $sqr" />
 	</xsl:call-template>
 </xsl:template>
 
