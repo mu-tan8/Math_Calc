@@ -8,6 +8,11 @@
   text-decoration:underline;
 }
 .arg_value {
+  color:blue;
+  font-style:italic;
+}
+.base_value {
+  color:green;
   font-style:italic;
 }
 </style>
@@ -90,16 +95,27 @@ Max value on XSLT (don't use calculation number)<br />
 <h4>$Math_PI = 3.14159265358979</h4>
 円周率π<br />
 Ludolph's constant.
+&lt;!-- syntax: --&gt;
+
+&lt;xsl:value-of select="$Math_PI" /&gt;
 </li>
 <li>
 <h4>$Math_E = 2.718281828459045</h4>
 ネイピア定数e<br />
 Napier's constant.
+&lt;!-- syntax: --&gt;
+
+&lt;xsl:value-of select="$Math_E" /&gt;
 </li>
 <li>
 <h4>$Math_LN2 = 0.693147180559945</h4>
 2の自然対数<br />
 natural logarithm 2.
+<pre>
+&lt;!-- syntax: --&gt;
+
+&lt;xsl:value-of select="$Math_LN2" /&gt;
+</pre>
 </li>
 </ul>
 </p>
@@ -195,7 +211,7 @@ if value of "<span class="arg_value">arg</span>" was out of range, than empty te
 <li>
 <h4>(double) #text = <span class="func_name">sin</span>[(double) <span class="arg_value">arg</span>]</h4>
 "<span class="arg_value">arg</span>"に対する正弦を返す<br />
-return of the sine value for "<pamn class="arg_value">arg</span>".<br />
+return of the sine value for "<span class="arg_value">arg</span>".<br />
 <pre>
 &lt;!-- syntax: --&gt;
 
@@ -277,7 +293,7 @@ if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
 <li>
-<h4>(double) #text = <span class="func_name">log</span>[(double) base , (double) <span class="arg_value">arg</span>]   (	arg &gt; 0 , base &gt; 0	)</h4>
+<h4>(double) #text = <span class="func_name">log</span>[(double) <span class="base_value">base</span> , (double) <span class="arg_value">arg</span>]   (	arg &gt; 0 , base &gt; 0	)</h4>
 "base"を底とする"arg"の対数を返す<br />
 return of the logarithm whose base is "base" for "arg".<br />
 "arg"または"base"が0以上でなければ空文字となる<br />
@@ -287,7 +303,7 @@ if value of arg or base was out of range, than empty text.<br />
 
 &lt;xsl:call-template name="<span class="func_name">log</span>"&gt;
 &lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
-&lt;xsl:with-param name="base" select="base" /&gt;
+&lt;xsl:with-param name="base" select="<span class="base_value">base</span>" /&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -322,7 +338,7 @@ if value of "arg" was out of range, than empty text.<br />
 </pre>
 <br />
 </li>
-<li>_
+<li>
 <h4>(double) #text = <span class="func_name">atanh</span>[(double) <span class="arg_value">arg</span>]	(	-1 &lt; arg &lt; 1	)</h4>
 "arg"に対する逆双曲線正接を返す<br />
 return of the area-hyperboli-tangent value of "arg".<br />
@@ -338,7 +354,7 @@ if value of "arg" was out of range, than empty text.<br />
 <br />
 </li>
 <li>
-<h4>(double) #text = <span class="func_name">pow</span>[(double) base , (double) <span class="arg_value">arg</span>]	(	base &gt; 0	)</h4>
+<h4>(double) #text = <span class="func_name">pow</span>[(double) <span class="base_value">base</span> , (double) <span class="arg_value">arg</span>]	(	base &gt; 0	)</h4>
 "base"を底とする"arg"の指数を返す<br />
 return of the exponent whose base is "base" for "arg".<br />
 "base"が0以上でなければ空文字となる<br />
@@ -348,7 +364,7 @@ if value of base was out of range, than empty text.<br />
 
 &lt;xsl:call-template name="<span class="func_name">pow</span>"&gt;
 &lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
-&lt;xsl:with-param name="base" select="base" /&gt;
+&lt;xsl:with-param name="base" select="<span class="base_value">base</span>" /&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
