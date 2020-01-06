@@ -74,7 +74,7 @@ so it taks several seconds to display.<br />
 &lt;xsl:call-template name="<span class="func_name">math_func_name</span>"&gt;
 &lt;xsl:with-param name="arg" select="<span class="arg_value">arg_value</span>" /&gt;
 &lt;!--
-&lt;xsl:with-param name="base" select="base_value" /&gt;
+&lt;xsl:with-param name="base" select="<span class="base_value">base_value</span>" /&gt;
 --&gt;
 &lt;/xsl:call-template&gt;
 </pre>
@@ -98,17 +98,21 @@ Max value on XSLT (don't use calculation number)<br />
 <h4>$Math_PI = 3.14159265358979</h4>
 円周率π<br />
 Ludolph's constant.
+<pre>
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:value-of select="$Math_PI" /&gt;
+</pre>
 </li>
 <li>
 <h4>$Math_E = 2.718281828459045</h4>
 ネイピア定数e<br />
 Napier's constant.
+<pre>
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:value-of select="$Math_E" /&gt;
+</pre>
 </li>
 <li>
 <h4>$Math_LN2 = 0.693147180559945</h4>
@@ -133,7 +137,9 @@ return of the cosine value of "<span class="arg_value">arg</span>".<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">cos</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -146,7 +152,9 @@ return of the arc-tangent value of "<span class="arg_value">arg</span>".<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">atan</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -159,7 +167,9 @@ return of the natural exponent value of "<span class="arg_value">arg</span>".<br
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">exp</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -174,7 +184,9 @@ if value of "arg" was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">cosh</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -189,7 +201,9 @@ if value of "<span class="arg_value">arg</span>" was out of range, than empty te
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">sqrt</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -204,7 +218,9 @@ if value of "<span class="arg_value">arg</span>" was out of range, than empty te
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">ln</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -219,7 +235,9 @@ return of the sine value for "<span class="arg_value">arg</span>".<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">sin</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -232,7 +250,9 @@ return of the tangent value for "<span class="arg_value">arg</span>".<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">tan</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -247,7 +267,9 @@ if value of "arg" was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">acos</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -260,7 +282,9 @@ return of the arc-sine value of "arg".<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">asin</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -275,7 +299,9 @@ if value of "arg" was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">tanh</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -290,14 +316,16 @@ if value of "arg" was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">sinh</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
 </li>
 <li>
 <h4>(double) #text = <span class="func_name">log</span>[(double) <span class="base_value">base</span> , (double) <span class="arg_value">arg</span>]   (	arg &gt; 0 , base &gt; 0	)</h4>
-"base"を底とする"arg"の対数を返す<br />
+"<span class="base_value">base</span>"を底とする"<span class="arg_value">arg</span>"の対数を返す<br />
 return of the logarithm whose base is "base" for "arg".<br />
 "arg"または"base"が0以上でなければ空文字となる<br />
 if value of arg or base was out of range, than empty text.<br />
@@ -305,8 +333,10 @@ if value of arg or base was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">log</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
-&lt;xsl:with-param name="base" select="<span class="base_value">base</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
+  &lt;xsl:with-param name="base" select="<span class="base_value">base</span>" /&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -321,7 +351,9 @@ if value of arg was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">acosh</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -336,7 +368,9 @@ if value of "arg" was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">asinh</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -351,14 +385,16 @@ if value of "arg" was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">atanh</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
 </li>
 <li>
 <h4>(double) #text = <span class="func_name">pow</span>[(double) <span class="base_value">base</span> , (double) <span class="arg_value">arg</span>]	(	base &gt; 0	)</h4>
-"base"を底とする"arg"の指数を返す<br />
+"<span class="base_value">base</span>"を底とする"<span class="arg_value">arg</span>"の指数を返す<br />
 return of the exponent whose base is "base" for "arg".<br />
 "base"が0以上でなければ空文字となる<br />
 if value of base was out of range, than empty text.<br />
@@ -366,8 +402,10 @@ if value of base was out of range, than empty text.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">pow</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
-&lt;xsl:with-param name="base" select="<span class="base_value">base</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
+  &lt;xsl:with-param name="base" select="<span class="base_value">base</span>" /&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -384,7 +422,9 @@ otherwise value of it's 0.<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">sgn</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
@@ -397,7 +437,9 @@ return of absolute value for "arg".<br />
 &lt;!-- syntax: --&gt;
 
 &lt;xsl:call-template name="<span class="func_name">abs</span>"&gt;
-&lt;xsl:with-param name="arg" select="<span class="arg_value">arg</span>" /&gt;
+  &lt;xsl:with-param name="arg"&gt;
+    &lt;xsl:value-of select="<span class="arg_value">arg</span>" /&gt;
+  &lt;/xsl:with-param&gt;
 &lt;/xsl:call-template&gt;
 </pre>
 <br />
